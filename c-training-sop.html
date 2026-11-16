@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>C 语言代码训练 SOP · 从「跟着抄」到「留得住」</title>
+<style>
+*{box-sizing:border-box}
+body{margin:0;background:#f7f6fa;color:#1b1a26;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif;line-height:1.75;font-size:15px}
+.wrap{max-width:940px;margin:0 auto;padding:0 20px 80px}
+header.hero{background:linear-gradient(135deg,#3c3489,#1e1a4d);color:#fff;padding:38px 0 32px;margin-bottom:20px}
+.w2{max-width:940px;margin:0 auto;padding:0 20px}
+.kicker{font-size:12px;letter-spacing:2px;opacity:.75;margin-bottom:10px}
+header.hero h1{font-size:27px;margin:0 0 10px;font-weight:700;color:#fff}
+.subtitle{font-size:14.5px;opacity:.92;margin:0;max-width:720px}
+.meta{margin-top:14px;font-size:12.5px;opacity:.82}
+h2{font-size:20px;margin:36px 0 12px;padding-bottom:9px;border-bottom:2px solid #e5e3ee}
+h3{font-size:16.5px;margin:24px 0 8px;font-weight:700;color:#2f2a6b}
+h3 .p{display:inline-block;background:#3c3489;color:#fff;font-size:13px;padding:2px 10px;border-radius:5px;margin-right:8px;vertical-align:1px}
+h4{font-size:14.5px;margin:16px 0 6px;font-weight:700;color:#1b1a26}
+p{margin:9px 0;color:#4a4759}
+strong{color:#1b1a26}
+.lead{background:#eeedfe;border-left:4px solid #3c3489;border-radius:0 8px 8px 0;padding:14px 18px;margin:16px 0}
+.lead p{color:#1b1a26;margin:5px 0}
+.warn{background:#fcebeb;border-left:4px solid #a32d2d;border-radius:0 8px 8px 0;padding:13px 18px;margin:14px 0}
+.warn p{color:#7d2626;margin:5px 0}
+.tip{background:#faeeda;border-left:4px solid #854f0b;border-radius:0 8px 8px 0;padding:13px 18px;margin:14px 0}
+.tip p{color:#5c3a09;margin:5px 0}
+.exam{background:#e1f5ee;border-left:4px solid #0f6e56;border-radius:0 8px 8px 0;padding:13px 18px;margin:14px 0}
+.exam p{color:#12503f;margin:5px 0}
+.card{background:#fff;border:1px solid #e5e3ee;border-radius:10px;padding:18px 22px;margin:14px 0}
+table{width:100%;border-collapse:collapse;margin:12px 0;font-size:14px;background:#fff;border:1px solid #e5e3ee;border-radius:8px;overflow:hidden}
+th{background:#efedf8;text-align:left;padding:9px 12px;font-weight:700;color:#1b1a26;border-bottom:1px solid #e5e3ee}
+td{padding:9px 12px;border-bottom:1px solid #f2f0f7;color:#4a4759;vertical-align:top}
+tr:last-child td{border-bottom:none}
+.tag{display:inline-block;padding:1px 8px;border-radius:4px;font-size:12px;background:#eeedfe;color:#3c3489;font-weight:600;margin-right:4px}
+.tag.r{background:#fcebeb;color:#a32d2d}.tag.g{background:#e1f5ee;color:#0f6e56}.tag.y{background:#faeeda;color:#854f0b}
+code{background:#f0eef8;padding:1px 6px;border-radius:4px;font-family:Consolas,monospace;font-size:13px;color:#3f3a72}
+pre{background:#1e1e2e;color:#e8e6f0;padding:15px;border-radius:8px;overflow-x:auto;font-size:13px;line-height:1.6;font-family:Consolas,monospace;margin:10px 0}
+details{background:#fff;border:1px solid #e5e3ee;border-radius:8px;padding:11px 18px;margin:10px 0}
+summary{cursor:pointer;font-weight:700;color:#2f2a6b;font-size:14px}
+details[open]{border-color:#3c3489}
+ul,ol{margin:8px 0;padding-left:22px;color:#4a4759}
+li{margin:5px 0}li::marker{color:#3c3489}
+.mini{font-size:12.5px;color:#7c7990}
+footer.doc{margin-top:38px;padding-top:16px;border-top:1px solid #e5e3ee;font-size:12.5px;color:#7c7990}
+nav.toc{background:#fff;border:1px solid #e5e3ee;border-radius:10px;padding:14px 20px;margin:20px 0}
+nav.toc a{color:#3c3489;text-decoration:none;font-size:14px;display:inline-block;margin:4px 16px 4px 0}
+nav.toc a:hover{text-decoration:underline}
+.big{font-size:16.5px;font-weight:700;color:#2f2a6b}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+@media(max-width:760px){.grid2{grid-template-columns:1fr}}
+.mode{background:#fff;border:2px solid #e5e3ee;border-radius:10px;padding:16px 20px;margin:14px 0}
+.mode.hot{border-color:#3c3489;background:#fbfaff}
+.mode .mh{font-size:16px;font-weight:700;color:#2f2a6b;margin-bottom:6px}
+.step2{display:flex;gap:11px;align-items:flex-start;margin:10px 0}
+.step2 .dot{flex:0 0 24px;height:24px;border-radius:50%;background:#3c3489;color:#fff;font-size:12.5px;font-weight:700;display:flex;align-items:center;justify-content:center;margin-top:3px}
+.step2 .bd{flex:1}
+.step2 .bd p{margin:2px 0}
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="w2">
+    <div class="kicker">C LANGUAGE · TRAINING SOP</div>
+    <h1>从「跟着抄」到「留得住」</h1>
+    <p class="subtitle">你提的两个问题——速度慢、第二天就忘——不是两个毛病，是同一个病根的两种表现。改掉一处，两个一起好。</p>
+    <div class="meta">2026 年 10 月 15 日 · 配套鹏哥 C 语言 2026 版（BV17a7K64ELH）</div>
+  </div>
+</header>
+
+<div class="wrap">
+
+<nav class="toc">
+  <a href="#s1">1 · 诊断：慢和忘为什么是同一件事</a>
+  <a href="#s2">2 · 先给「跟着抄」平反</a>
+  <a href="#s3">3 · 怎么变快：三种模式</a>
+  <a href="#s4">4 · 怎么不忘：四个动作</a>
+  <a href="#s5">5 · 按内容类型选模式</a>
+  <a href="#s6">6 · 每日定量节奏</a>
+  <a href="#s7">7 · 明天 10/16（考前最后一天）特殊版</a>
+  <a href="#s8">8 · 这套怎么扩展到其他科目</a>
+</nav>
+
+<!-- ============ 1 ============ -->
+<h2 id="s1">1 · 诊断：慢和忘为什么是同一件事</h2>
+
+<p>你现在的动作是：<strong>看视频 → 他写一段 → 你暂停跟着敲一遍 → 继续。</strong>这个循环里，你的大脑在做的事情叫<strong>识别</strong>（recognition）——看到屏幕上有 <code>int</code>，你的手敲 <code>int</code>；看到 <code>for</code>，你敲 <code>for</code>。</p>
+
+<p>但你考试、甚至是你以后真正写代码的时候，大脑要做的事情叫<strong>生成</strong>（recall）——面对一个空文件和一个问题，你得自己决定第一步写什么。</p>
+
+<div class="warn">
+  <p><strong>识别 ≠ 生成。</strong>能认出来，不代表能想起来。这就是为什么第二天全忘了——<strong>你当天压根没把它存进去。</strong></p>
+</div>
+
+<h3>顺带把这笔时间账算清楚</h3>
+<p>敲一段 20 行的代码大约花 5 分钟。但这 5 分钟里，真正让大脑参与决策的时间可能不到 30 秒，<strong>剩下 4 分半是手指在动</strong>。</p>
+<p>所以你感觉「我今天学了 2 小时」，实际<strong>大脑只工作了 15 分钟</strong>。</p>
+
+<div class="lead">
+  <p><strong>结论：你不是写得慢，你是「低认知负荷地消耗了大量时间」。</strong>慢和忘是同一个原因——所以不需要两个解法，改一个动法，两边一起解。</p>
+</div>
+
+<h3>还有一个必须提前说的事实</h3>
+<p><strong>写代码的快慢，从来不是程序员的瓶颈。</strong>真正的瓶颈是两件事：<strong>从空白文件的构建速度</strong>，和<strong>调试的速度</strong>。</p>
+<p>所以你焦虑「我太慢了」其实是焦虑错了地方。别追"敲得更快"，要追<strong>「每次动手指的时候，脑子也得跟着动」</strong>。</p>
+
+<!-- ============ 2 ============ -->
+<h2 id="s2">2 · 先给「跟着抄」平反</h2>
+
+<p>我不是说你一直在做无用功。跟着抄有三个真实价值：</p>
+<ul>
+  <li><strong>熟悉编译器的手感</strong>——报错长什么样、怎么编译怎么运行，这些东西只能靠亲手点一遍才知道</li>
+  <li><strong>消除「我写不出来」的恐惧</strong>——对零基础的人来说，敢打开 IDE 本身就是一道坎</li>
+  <li><strong>让眼睛习惯代码的形状</strong>——缩进、括号配对的视觉模式</li>
+</ul>
+
+<div class="tip">
+  <p><strong>这三点对一个新手是有价值的，但它不该承担「记住」的任务。</strong></p>
+  <p>正确定位：<strong>跟着抄是热身，不是训练。</strong>把它从一个小时的流水线，压缩成每天 10 分钟的开场，剩下的时间给下面三个模式。</p>
+</div>
+
+<!-- ============ 3 ============ -->
+<h2 id="s3">3 · 怎么变快：三种模式</h2>
+
+<div class="mode hot">
+  <div class="mh">模式 1 · 延迟复现 <span class="tag r">最有效，也最不舒服</span></div>
+  <p><strong>做法：</strong>鹏哥在动手写代码之前，通常会先说「我现在要做什么」——<strong>就在这一刻暂停。</strong>不要等他写完。</p>
+  <div class="step2"><div class="dot">1</div><div class="bd"><p>自己先在编译器里写，目标是跑通。卡住<strong>至少硬撑 5 分钟</strong>再放弃。</p></div></div>
+  <div class="step2"><div class="dot">2</div><div class="bd"><p>播放看他怎么写，<strong>只回头看你卡住的那一段</strong>。</p></div></div>
+  <div class="step2"><div class="dot">3</div><div class="bd"><p>把他那段话用自己的方式重敲一遍，加一行注释：<strong>「我当时卡在哪」</strong>。</p></div></div>
+  <p><strong>为什么反而更快：</strong>你只慢在自己不会的地方。会的地方一秒带过。<br>
+  <strong>为什么记得住：</strong>你卡住的那一刻，大脑才真正在工作——而不在手。</p>
+</div>
+
+<div class="mode">
+  <div class="mh">模式 2 · 预测式 <span class="tag g">最省时间，适合长代码</span></div>
+  <p><strong>做法：</strong>看到鹏哥写完 <code>scanf("%d%d", &amp;a, &amp;b);</code>，立刻暂停。</p>
+  <ul>
+    <li>先<strong>猜下一行是什么</strong>，甚至先猜<strong>这段跑出来输出什么</strong>。写纸上。</li>
+    <li>然后再放。</li>
+  </ul>
+  <div class="grid2">
+    <div class="exam"><p><strong>猜对了</strong> → 这一行你已经会了，<strong>跳过，不用敲</strong>。</p></div>
+    <div class="warn"><p><strong>猜错了</strong> → <strong>这就是你今天唯一要学的一行</strong>，重点记。</p></div>
+  </div>
+  <p class="mini">这个模式下，一集视频里你真正需要动手的代码可能<strong>只剩 3–5 处</strong>，其余全跳过。速度自然翻倍，而你学到的东西反而更准。</p>
+</div>
+
+<div class="mode">
+  <div class="mh">模式 3 · 抄改（不是抄写） <span class="tag y">改动最小，从现有习惯升级</span></div>
+  <p><strong>做法：</strong>照样跟着抄，但<strong>抄完之后必须做一处改动</strong>。</p>
+  <pre>鹏哥写：求 1~100 中所有能被 3 整除的数的和
+你抄完改成：求 1~100 中所有偶数的和        ← 有意义的变化 ✓
+          把 sum 改成 total              ← 换变量名，无效 ✗
+          把 100 改成 200                ← 换常数，几乎无效 ✗</pre>
+  <p><strong>为什么有效：</strong>要改对，你必须知道哪一行是干什么的。<strong>而你改错的地方，就是你自己以为懂了其实没懂的地方。</strong>它把「抄写」变成了一次强制的理解检验。</p>
+</div>
+
+<div class="warn">
+  <p><strong>硬指标 · 20 分钟法则</strong></p>
+  <p>一个 20 行以内的程序，从空白到跑通，新手 <strong>8–15 分钟是正常的</strong>。</p>
+  <p><strong>超过 20 分钟还没跑通 → 不是你写得慢，是某个概念你根本没懂。</strong>这时候不应该死磕，应该：回去看那一集，或者直接问 AI——<em>「这段代码我卡在 XX，只告诉我思路，不要给完整代码」</em>。</p>
+  <p class="mini">这条判断标准比什么都重要：它把「我很笨/我太慢」的自我怀疑，转成了「我这里没懂」的具体问题。</p>
+</div>
+
+<!-- ============ 4 ============ -->
+<h2 id="s4">4 · 怎么不忘：四个动作</h2>
+
+<h3>先做一件减压的事：分清两种「忘」</h3>
+<table>
+  <tr><th style="width:150px">忘的是什么</th><th style="width:230px">例子</th><th>要不要管</th></tr>
+  <tr>
+    <td><strong>语法细节</strong></td>
+    <td><code>double</code> 用 <code>%lf</code> 还是 <code>%f</code>？判断相等是 <code>==</code> 还是 <code>=</code>？</td>
+    <td><span class="tag g">不用背</span><strong>查就行</strong>。写了十年代码的人也天天查。</td>
+  </tr>
+  <tr>
+    <td><strong>问题 → 解法的骨架</strong></td>
+    <td>判断整除写 <code>n%3==0</code>；遍历数组写 <code>for(i=0;i&lt;n;i++)</code>；累加前先 <code>int sum=0;</code></td>
+    <td><span class="tag r">必须记住</span><strong>这才是要攻的。</strong></td>
+  </tr>
+</table>
+
+<div class="lead">
+  <p><strong>C 语言真正需要刻进脑子里的东西，不超过 15 条。</strong>就是你笔记里那几张表：格式符表、ASCII 三组、运算符优先级、几个固定套路的骨架。</p>
+  <p><strong>所以你说的「什么都忘了」，很可能 80% 是本来就不该背的。</strong>把记忆预算压在那 20% 上，负担立刻少一大半。</p>
+</div>
+
+<h3>动作 1 · 注释只写「为什么」，不写「是什么」</h3>
+<div class="card">
+<pre>// ✗ 无效注释（等于把代码翻译一遍，对记忆毫无帮助）
+scanf(" %c", &x);   // 读入一个字符
+
+// ✓ 有效注释（写的是「为什么这么写 / 不这么写会怎样」）
+scanf(" %c", &x);   // %c 前必须加空格：否则会把上一次输入留下的回车读进来，x 变成 '\n'</pre>
+  <p><strong>这是成本最低、收益最高的一步。</strong>多花 30 秒，留存翻倍。它把「手指运动」强行变成了「语义加工」。</p>
+  <div class="warn"><p><strong>自检标准：</strong>如果你写完注释，发现自己<strong>只能写出「这是什么」、写不出「为什么这么写」</strong>——说明这一段你没懂。标红，回去看视频。这是整套方法里最好的「懂没懂探测器」。</p></div>
+</div>
+
+<h3>动作 2 · 隔天重写，不要当天写三遍</h3>
+<p><strong>这条你已经听我说过两次了</strong>——数学的<strong>「一题三遍法」</strong>、英语的<strong>检索练习</strong>、现在这个，<strong>是同一个东西的第三次出现</strong>：</p>
+<div class="card">
+  <table>
+    <tr><th>遍次</th><th>时间</th><th>怎么做</th></tr>
+    <tr><td>第 1 遍</td><td>今天</td><td>跟着写 / 拼出来（这是输入）</td></tr>
+    <tr><td><strong>第 2 遍</strong></td><td><strong>明天</strong></td><td><strong>凭记忆重写，不看视频不看笔记</strong></td></tr>
+    <tr><td>第 3 遍</td><td>3 天后</td><td>还能写出来 → 这条真的进脑子了</td></tr>
+  </table>
+</div>
+<div class="warn">
+  <p><strong>关键是间隔，不是次数。</strong>当天连写三遍没用——那是短期记忆在硬撑，你会产生「我记住了」的错觉，然后第二天照样忘。</p>
+  <p><strong>第 2 遍最值钱</strong>，因为它暴露的正是「你以为自己懂了」的那部分。</p>
+</div>
+
+<h3>动作 3 · 建「最小代码库」，每天开工前跑旧的</h3>
+<p>你现在的文件大概还是散的。<strong>改成按「这段解决什么问题」来组织，不按「第几集」组织。</strong></p>
+<pre>snippets/
+  01_scanf_char.c        // %c 不跳过空白 —— 写给明天就会忘的自己看
+  02_format_width.c      // %3d 域宽、%.1f 精度
+  03_compound_assign.c   // b *= a += 2 的结合顺序
+  04_divide_mod.c        // 整数除法 7/2=3、取余 %
+  05_until_zero.c        // 读到 0 为止的统计（2025 真题）
+  06_array_max.c         // 数组最大值及下标
+  07_bubble_sort.c       // 冒泡排序</pre>
+<div class="card">
+  <p><strong>三条规则：</strong></p>
+  <ol>
+    <li>每个文件<strong>独立可编译</strong>、<strong>不超过 20 行</strong>，第一行注释写「这段解决什么问题」。</li>
+    <li><strong>每天开始学新东西之前，先随手打开 1–2 个旧的，不看原文件重新敲一遍。</strong></li>
+    <li>敲不出来 → 那就是今天要补的东西。</li>
+  </ol>
+  <p class="mini">这每天 5 分钟的热身，就是「艾宾浩斯遗忘曲线」的穷人版实现——不需要做闪卡、不需要排复习计划，靠开工前两个文件就解决了。</p>
+</div>
+
+<h3>动作 4 · 每天收工三行日志（3 分钟）</h3>
+<pre>10/15
+今天学的唯一一件新事：scanf 读 double 必须用 %lf，写成 %f 会读出乱码
+卡住的地方：一直不懂为什么输出 48，后来发现 %c 读的是字符 '0' 的 ASCII 码
+一句话总结：格式符必须和变量类型对应 —— 这是 printf/scanf 的全部秘密</pre>
+<p><strong>为什么有用：</strong>明天开始前读一遍，一天的收获压成 3 行，比翻 30 个文件有用得多。<strong>而且「卡住的地方」这一行会稳定暴露你的真实薄弱点</strong>——连续三天都卡在同一类事情上，那就是你必须回头补的概念。</p>
+
+<!-- ============ 5 ============ -->
+<h2 id="s5">5 · 按内容类型选模式</h2>
+<p>既然你已经学到 P21 之后，下面直接对着鹏哥这套视频用：</p>
+<table>
+  <tr><th style="width:190px">这一段在讲什么</th><th>用哪个模式</th></tr>
+  <tr>
+    <td><strong>全新概念</strong><br><span class="mini">数组、switch、do-while</span></td>
+    <td><span class="tag r">延迟复现（模式 1）</span><br>先看完整一集<strong>不写</strong> → 关掉 → 凭记忆写一个最小例子 → 卡住标红 → 回去只重看那一段</td>
+  </tr>
+  <tr>
+    <td><strong>演示一道完整题目</strong><br><span class="mini">猜数字、九九乘法表</span></td>
+    <td><span class="tag r">延迟复现（模式 1）</span><br>他说完题目就暂停，先自己写 5 分钟。这是效率最高的一类，别浪费</td>
+  </tr>
+  <tr>
+    <td><strong>讲细节 / 易错点</strong><br><span class="mini">%c 的坑、&amp;&amp; 优先级</span></td>
+    <td><span class="tag g">预测式（模式 2）</span><br>每写完一行就暂停猜下一行。这类视频通常很短，用预测式 10 分钟能顶别人 40 分钟</td>
+  </tr>
+  <tr>
+    <td><strong>纯概念讲解，没有代码</strong><br><span class="mini">数据类型介绍、signed/unsigned、取值范围</span></td>
+    <td><span class="tag y">别敲，甚至别看视频</span><br>看笔记的速记表就够。这类内容<strong>敲代码学不到任何东西</strong></td>
+  </tr>
+</table>
+
+<!-- ============ 6 ============ -->
+<h2 id="s6">6 · 每日定量节奏</h2>
+<div class="card">
+  <table>
+    <tr><th>动作</th><th style="width:100px">时长</th><th>说明</th></tr>
+    <tr><td><strong>热身</strong>（跑旧代码）</td><td>~10′</td><td>从 snippets 随机挑 1–2 个，不看源文件重写</td></tr>
+    <tr><td><strong>看视频</strong>（2 倍速）</td><td>~60′</td><td>按上一节选模式，<strong>不是全程跟着敲</strong></td></tr>
+    <tr><td><strong>精写程序</strong></td><td>~50′</td><td><strong>最多 3 个</strong>，每个都写「为什么」注释</td></tr>
+    <tr><td><strong>三行日志</strong></td><td>~3′</td><td>今天的新事 / 卡住的地方 / 一句话总结</td></tr>
+  </table>
+</div>
+
+<div class="warn">
+  <p><strong>两个反直觉但必须守的规矩：</strong></p>
+  <p><strong>① 一天不要写超过 3 个新程序。</strong>超过就是无效重复。一个程序如果在三天后能被你重新写出来，它的价值<strong>大于你新写三个程序</strong>。</p>
+  <p><strong>② 别一天看超过 15 集。</strong>看视频是最容易产生「我在进步」错觉的活动，因为它不费力。<span class="mini">（注：考前冲刺期这条不适用，见第 7 节）</span></p>
+</div>
+
+<!-- ============ 7 ============ -->
+<h2 id="s7">7 · 明天 10/16（考前最后一天）特殊版</h2>
+<div class="warn">
+  <p><strong>考试前一天不适合再用模式 1 了</strong>——它太慢，而且此刻你的目标已经不是「学新东西」，是<strong>「提取流畅度」</strong>。</p>
+</div>
+<div class="lead">
+  <p><strong>明天全部切到「蒙写」：</strong></p>
+  <ol>
+    <li>把笔记里的<strong>三道模板</strong>（能被 3 整除的数 / 读到 0 为止统计 / 友好数）看一遍。</li>
+    <li><strong>合上所有东西，从空白文件开始写。</strong>不看笔记，不看视频，不看你的 snippets。</li>
+    <li><strong>卡住的地方就是明天唯一的复习清单。</strong>只有这些地方值得回去看。</li>
+    <li><strong>剩下的时间拿来再蒙写一遍。</strong>重复这一轮，直到三道都能在 10 分钟内写出来。</li>
+  </ol>
+</div>
+<p class="mini">而且要<strong>分散到不同时间段</strong>：上午蒙写一遍 → 下午蒙写一遍 → 晚上蒙写一遍。集中在晚上连写三遍等于一遍。</p>
+
+<!-- ============ 8 ============ -->
+<h2 id="s8">8 · 这套怎么扩展到其他科目</h2>
+<p>你说要「可扩展」，那把通则抽出来——<strong>这四个动作不挑语言、不挑科目</strong>：</p>
+<div class="card">
+  <ol>
+    <li><strong>任何输入型学习，都必须在 24 小时内转成一次输出。</strong>这是整套方法唯一的核心。看视频、看书、听课——当天不做一次提取，等于白看。</li>
+    <li><strong>间隔 &gt; 次数。</strong>隔天做第二遍，胜过当天做三遍。这一条适用于所有记忆类任务。</li>
+    <li><strong>写「为什么」不写「是什么」。</strong>笔记、注释、错题本，全部按这个标准。</li>
+    <li><strong>卡住的那一下，才是学习的时刻。</strong>顺畅地抄完 20 行，脑子里什么都没留下；卡住 5 分钟然后想通，这一段跟了你一辈子。</li>
+  </ol>
+</div>
+<table>
+  <tr><th style="width:130px">场景</th><th>怎么套</th></tr>
+  <tr><td><strong>数据结构</strong>（大二）</td><td>同一个链表，今天写 malloc 版 → <strong>明天</strong>凭记忆写一遍 → 后天加个「无头结点」的变体做改动测试</td></tr>
+  <tr><td><strong>学第二门语言</strong><br><span class="mini">Python / Java</span></td><td>新语法用<strong>模式 1</strong>（先猜再验证）；你已经会的概念迁移过来时用<strong>模式 3</strong>（找个 C 程序改写成新语言）</td></tr>
+  <tr><td><strong>数学</strong></td><td>就是你已经有的<strong>「定义优先法 + 一题三遍」</strong>——<span class="tag">同构</span></td></tr>
+  <tr><td><strong>英语</strong></td><td>就是<strong>「检索练习」</strong>——背单词不如合上书默写，<span class="tag">同构</span></td></tr>
+</table>
+
+<div class="tip">
+  <p><strong>你现在已经把这个原则见了三遍了</strong>——数学的默写定义、英语的检索练习、C 语言的延迟复现。<strong>它们不是三个技巧，是同一条规律。</strong>以后遇到任何「学了记不住」的情况，先问一句：<em>「我在 24 小时内做过一次输出吗？」</em>答案基本就是原因。</p>
+</div>
+
+<footer class="doc">
+  写于 2026-10-15 21:35，距 SYUCPCT 笔试（10/17 10:00）还有 1.5 天。<br>
+  第 1–6 节是长期方法，考完之后照样用；第 7 节是明天的临时处理，考完即废。
+</footer>
+
+</div>
+</body>
+</html>

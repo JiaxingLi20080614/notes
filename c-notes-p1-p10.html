@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="zh-CN" data-page-node-id="2Sn6HncZGFzHaoX9l0hAzc">
+<head data-page-node-id="6FGh2ABuLD1BpBUkZZGQYM">
+<meta charset="UTF-8" data-page-node-id="eXc2UsgINVBDoGRD0Orras">
+<meta name="viewport" content="width=device-width, initial-scale=1.0" data-page-node-id="irJdzT9pe0LrGPa8zUTQwo">
+<title>鹏哥 C 语言 2026 版 P1–P10 笔记（含真题挂接）</title>
+<style>
+*{box-sizing:border-box}
+body{margin:0;background:#f7f6fa;color:#1b1a26;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif;line-height:1.75;font-size:15px}
+.wrap{max-width:940px;margin:0 auto;padding:0 20px 80px}
+header.hero{background:linear-gradient(135deg,#3c3489,#1e1a4d);color:#fff;padding:38px 0 32px;margin-bottom:20px}
+.w2{max-width:940px;margin:0 auto;padding:0 20px}
+.kicker{font-size:12px;letter-spacing:2px;opacity:.75;margin-bottom:10px}
+header.hero h1{font-size:27px;margin:0 0 10px;font-weight:700;color:#fff}
+.subtitle{font-size:14.5px;opacity:.92;margin:0;max-width:720px}
+.meta{margin-top:14px;font-size:12.5px;opacity:.82}
+h2{font-size:20px;margin:36px 0 12px;padding-bottom:9px;border-bottom:2px solid #e5e3ee}
+h3{font-size:16.5px;margin:24px 0 8px;font-weight:700;color:#2f2a6b}
+h3 .p{display:inline-block;background:#3c3489;color:#fff;font-size:13px;padding:2px 10px;border-radius:5px;margin-right:8px;vertical-align:1px}
+p{margin:9px 0;color:#4a4759}
+strong{color:#1b1a26}
+.lead{background:#eeedfe;border-left:4px solid #3c3489;border-radius:0 8px 8px 0;padding:14px 18px;margin:16px 0}
+.lead p{color:#1b1a26;margin:5px 0}
+.warn{background:#fcebeb;border-left:4px solid #a32d2d;border-radius:0 8px 8px 0;padding:13px 18px;margin:14px 0}
+.warn p{color:#7d2626;margin:5px 0}
+.tip{background:#faeeda;border-left:4px solid #854f0b;border-radius:0 8px 8px 0;padding:13px 18px;margin:14px 0}
+.tip p{color:#5c3a09;margin:5px 0}
+.exam{background:#e1f5ee;border-left:4px solid #0f6e56;border-radius:0 8px 8px 0;padding:13px 18px;margin:14px 0}
+.exam p{color:#12503f;margin:5px 0}
+.card{background:#fff;border:1px solid #e5e3ee;border-radius:10px;padding:18px 22px;margin:14px 0}
+table{width:100%;border-collapse:collapse;margin:12px 0;font-size:14px;background:#fff;border:1px solid #e5e3ee;border-radius:8px;overflow:hidden}
+th{background:#efedf8;text-align:left;padding:9px 12px;font-weight:700;color:#1b1a26;border-bottom:1px solid #e5e3ee}
+td{padding:9px 12px;border-bottom:1px solid #f2f0f7;color:#4a4759;vertical-align:top}
+tr:last-child td{border-bottom:none}
+.tag{display:inline-block;padding:1px 8px;border-radius:4px;font-size:12px;background:#eeedfe;color:#3c3489;font-weight:600;margin-right:4px}
+.tag.r{background:#fcebeb;color:#a32d2d}.tag.g{background:#e1f5ee;color:#0f6e56}.tag.y{background:#faeeda;color:#854f0b}
+code{background:#f0eef8;padding:1px 6px;border-radius:4px;font-family:Consolas,monospace;font-size:13px;color:#3f3a72}
+pre{background:#1e1e2e;color:#e8e6f0;padding:15px;border-radius:8px;overflow-x:auto;font-size:13px;line-height:1.6;font-family:Consolas,monospace;margin:10px 0}
+details{background:#fff;border:1px solid #e5e3ee;border-radius:8px;padding:11px 18px;margin:10px 0}
+summary{cursor:pointer;font-weight:700;color:#2f2a6b;font-size:14px}
+details[open]{border-color:#3c3489}
+ul,ol{margin:8px 0;padding-left:22px;color:#4a4759}
+li{margin:5px 0}li::marker{color:#3c3489}
+.mini{font-size:12.5px;color:#7c7990}
+footer.doc{margin-top:38px;padding-top:16px;border-top:1px solid #e5e3ee;font-size:12.5px;color:#7c7990}
+</style>
+</head>
+<body data-page-node-id="NFDgGndHUdJeUc7DohpSDT">
+<header class="hero" data-page-node-id="aLs91bKFDUD4pAofrMCsmA"><div class="w2" data-page-node-id="YfHhFkvR3WHUdynanqfEOG">
+  <div class="kicker" data-page-node-id="6TyDL8imluisrHV0nrb7nK">鹏哥 C 语言 2026 官方完整版 · BV17a7K64ELH</div>
+  <h1 data-page-node-id="sqkGryq9ypJGZTa7juQ6G3">P1–P10 笔记（C 语言常见概念）</h1>
+  <p class="subtitle" data-page-node-id="EbKml8BZMR4rWYWknpDT4H">每一集都标出「真题挂接」——它对应 SYUCPCT 招新卷里的哪一道题。学的时候就知道为什么学，不做无用功。</p>
+  <div class="meta" data-page-node-id="6i5j3aG0uG4jV7pzxlCGFE">整理于 2026-10-12 · 距笔试 10/17 还有 5 天</div>
+</div></header>
+<div class="wrap" data-page-node-id="ZwH6kCj8JcBi2m3I3DCtWc">
+
+<div class="lead" data-page-node-id="2rIN5IYvVVkDBlmWG3iBhn">
+<p data-page-node-id="GiWXDDGd7KehjMMUx0A1TC"><strong data-page-node-id="9BU4cE5aQgKH7ebMJqPXaP">版本确认：</strong>你学的是 <strong data-page-node-id="lDBwnZ9vmBTncYs9gGXQyC">2026 官方完整版（BV17a7K64ELH，共 200 集）</strong>。该版本 <strong data-page-node-id="0fws7lTKViy4kdG1yJjh9C">P44–P52 是数组，P52 = 「数组练习（下）」</strong>——正好对应官方公布的"考查到数组"。<span class="tag r" data-page-node-id="8hCsVDW0KHbvDqj1WhlHAv">已修正</span>我此前按 2024 版（BV1Vm4y1r7jY）推算的集数是错的：那个版本 P52 是"听首歌休息"，数组在 P54–55。</p>
+</div>
+
+<h2 data-page-node-id="gGvJ03P1TIgLv7ZPKW13yG">P1–P10 总览</h2>
+<table data-page-node-id="DFMhwCBxgJLquXD3uJ01rk">
+<tr data-page-node-id="5hl94ECBlSdifYq77phGDK"><th style="width:60px" data-page-node-id="5L8CIKbghGDJOHMXypbIOG">集</th><th data-page-node-id="540CAXTN9qRGqZTGDJ9KBP">标题</th><th style="width:150px" data-page-node-id="DLFHXwXcvMwWEv4rNpu4hX">考点强度</th><th data-page-node-id="N3FBjxVUcB5JvKW46d14Lz">真题挂接</th></tr>
+<tr data-page-node-id="nXvXQ5zOpNnOsDGH8Hjfmx"><td data-page-node-id="UrJJwQF7yUTPfWtKsTHuBE">P1</td><td data-page-node-id="KooxBROJlA7QsCasywfBNa">认识 C 语言</td><td data-page-node-id="jRNJF6BqlsoVo0q0cHcLGj"><span class="tag" data-page-node-id="DuAxUm4u8Tstp6SFADaxDY">常识</span></td><td data-page-node-id="TKDb6PB9k5UQnO3Cq83heV">—</td></tr>
+<tr data-page-node-id="TJC2dfEq6qG7DgeJY5aPFg"><td data-page-node-id="m91dJBnzpqK9m4oYwHKwgW">P2</td><td data-page-node-id="pLwfUylPmolWLzrCzTsg2a">编译器的选择 VS2026</td><td data-page-node-id="qKdtNF4uzs7ROOSTjjMXQ7"><span class="tag" data-page-node-id="WWBqde1iO44KAi8ziOCouL">操作</span></td><td data-page-node-id="6aKELQUJJXzN97pojkg5Pw">—</td></tr>
+<tr data-page-node-id="HABPpTTmEw0bDMYDCHAeaR"><td data-page-node-id="5Sedd6dyWC6NbGp5g7zFPE">P3</td><td data-page-node-id="2AsnNsw7nrRluSloH5wxaN">第一个 C 语言程序</td><td data-page-node-id="HPf2LHPLhgTq6YUDeFBcIA"><span class="tag y" data-page-node-id="UYyRaEi5XW0dHAW2ZB7r0f">中</span></td><td data-page-node-id="8iKnFRJmOFOhz9k4Wj8HCj">程序结构</td></tr>
+<tr data-page-node-id="fxWRRV371ToHxwIXXEFl9u"><td data-page-node-id="i3iq4FBEgsaC4tU0qTJYF2">P4</td><td data-page-node-id="jU8kStt9pCCd8fu2eAvi9c">main 函数详解</td><td data-page-node-id="skhGrXDaW890IEbdLs8pWp"><span class="tag r" data-page-node-id="d7i0YOhleaWnXDhxIk9ZTt">高</span></td><td data-page-node-id="F1qT4IKEKiLd6onZMellhT">选择题常考 main 的个数与 return</td></tr>
+<tr data-page-node-id="zX0R0IK6WQZIQMgo1AfCaf"><td data-page-node-id="Ix4mlCSOv6AiASi3GPUeuT">P5</td><td data-page-node-id="B29bdnxqsm5CpV8CS3CrF9">printf 函数和库函数</td><td data-page-node-id="2CuFkIk1LUY7AStv1jX1g5"><span class="tag r" data-page-node-id="F4tiyJCs62EgA2HTYdDUrP">必考</span></td><td data-page-node-id="A5FeWC8vS5UPonZENazvMq">2024 第 4、5 题（%3d / %.0lf）</td></tr>
+<tr data-page-node-id="V3WFuGdtuxztW3GiVzmGca"><td data-page-node-id="xszT49vIcJZ1Bc7mnEzA7y">P6</td><td data-page-node-id="HkNY3vU3ppNC4XEOvL1EMu">关键字介绍</td><td data-page-node-id="Hoo2DsT67P3N1zou3qwP4W"><span class="tag r" data-page-node-id="zFn39cKbfIUw3AZjMEChcG">必考</span></td><td data-page-node-id="zkAQQzkOTfCKcOxACrpdcP">2024 第 1 题（合法标识符）</td></tr>
+<tr data-page-node-id="T0Hw5C8MEOSwlG3SVriIL4"><td data-page-node-id="1jpHSyzbdn5wcPU4fOYSol">P7</td><td data-page-node-id="n5WhvPQeHO5Ck1xG1EUEis">字符和 ASCII 编码</td><td data-page-node-id="tzMe4LsFJqibprlBF8kL4S"><span class="tag r" data-page-node-id="3cNANGy8CFwHpVcNwvVLug">必考</span></td><td data-page-node-id="jNk5JWVkV6OXsLOLMuEKV5">2024 第 4 题（'0' → 48）</td></tr>
+<tr data-page-node-id="CdRKVPtmurwLqaEYpmb34C"><td data-page-node-id="a0CD7b4R79OwdRGELii0hQ">P8</td><td data-page-node-id="xTp2AnTntG7rFghObhSh1b">字符串和 \0</td><td data-page-node-id="jUb0mifpt49S4XzY4Rlr8E"><span class="tag r" data-page-node-id="DRj1C99doxG3bMNaONYADE">高</span></td><td data-page-node-id="EZnoaAyMO2F8QGHsnWpkAo">strlen / 数组长度类选择填空</td></tr>
+<tr data-page-node-id="cWuITOzVCySr7sy9Ciszjb"><td data-page-node-id="wALJyguk0aKcedm8QtLIaq">P9</td><td data-page-node-id="rjvFdQSDBpC2SYsp5pN9lW">转义字符（上）</td><td data-page-node-id="WSSuGzLxkOAD9SqyVGvhEa"><span class="tag r" data-page-node-id="dmdAWD2xswvHee5tmeef1I">高</span></td><td data-page-node-id="INvdLQYDgEaebM7c4UegQm">strlen 陷阱题</td></tr>
+<tr data-page-node-id="3xEr670FpiVYZsF4kTCzg8"><td data-page-node-id="lTU99OM0OC6k8gjD4L1P71">P10</td><td data-page-node-id="HOsJIR9Sk099wtokodCKun">转义字符（中）</td><td data-page-node-id="7oFdZlKrfmNsCBbQRoP7jJ"><span class="tag r" data-page-node-id="FqYC3VG4UGG2YpWMAgy0Vo">高</span></td><td data-page-node-id="eH5E4CeA5uqZRlEJXitasP">\ddd / \xhh 八进制十六进制转义</td></tr>
+</table>
+
+<h3 data-page-node-id="1VZk0VpG6dG8s2CwRtrEGD"><span class="p" data-page-node-id="iJxXlamAOb43Axr7lKTNuu">P1</span>认识 C 语言</h3>
+<div class="card" data-page-node-id="MHouLkFd2A1v4NZnHAEDJz">
+<p data-page-node-id="tvhqRRy4Cff5DjKYMk91vn"><strong data-page-node-id="cBbYWf9nJBPCSbTE7nPpFR">核心：</strong>C 是<strong data-page-node-id="ZAzLEcBETGZt80A2rwXn7K">编译型</strong>语言。写出来的 <code data-page-node-id="EQtu0vNY3BaSkTxRuTDrJS">.c</code> 是<strong data-page-node-id="55Y2ryEDSqwEGOaAVyP6Eu">源文件</strong>，不能直接运行，要经过 <strong data-page-node-id="radoqEncU3WQLj6llxEmkZ">编译 → 链接</strong> 生成 <code data-page-node-id="WMNdiU6KnPef9xwDS1mIv1">.exe</code>（可执行文件）才能跑。</p>
+<p data-page-node-id="CsMMA32KNwwm1126S2lf6E"><strong data-page-node-id="m7BtVMD6yIDlcHJ4KT9xU1">流程：</strong><code data-page-node-id="49xY4Yc4IhP9OpJOnCqYYL">test.c</code> —(编译)→ <code data-page-node-id="ydhyy1i3oknqGDxV7qpiki">test.obj</code> —(链接)→ <code data-page-node-id="Dd6OXR8nNIm5T7Lz2zHidG">test.exe</code></p>
+<p data-page-node-id="y2eLlm8SVOXqNG17RySTwD"><strong data-page-node-id="PzLFriK3E86eBbHHv64jLg">要记住的三句话</strong>：① C 语言是一门面向过程的、贴近底层的语言；② 它效率高、可移植性好，操作系统/嵌入式/单片机大量使用；③ 你后面学数据结构、操作系统都要用到它。</p>
+<p class="mini" data-page-node-id="HAVuyQvKaGdKaZn965ildg">这一集考试基本不考，看个 5 分钟建立整体认知就行。</p>
+</div>
+
+<h3 data-page-node-id="atw3MG9S3vSKxTMqWuUXNl"><span class="p" data-page-node-id="egjBQoYOvPJeffhEwKXMJE">P2</span>编译器的选择（VS2026）</h3>
+<div class="card" data-page-node-id="HGb3gZ4mgrXzQVEa0Jhc3w">
+<p data-page-node-id="GEPcr4WGHDBKY4A9sCdkkZ"><strong data-page-node-id="qs8x6iCPE0aws0fkBbsxI9">IDE 是什么：</strong>集成开发环境 = 编辑器 + 编译器 + 调试器。<strong data-page-node-id="WT5O0d5IjvzV2mQun1GvGG">写代码、编译、找 bug 都在里面完成。</strong></p>
+<table data-page-node-id="5I5R8C7t7teBYuIZYlHEl6">
+<tr data-page-node-id="GMMgVyZEu7rlwz1aekuGCd"><th data-page-node-id="D6uSVJFVIlUNiHAB0ZBsfl">工具</th><th data-page-node-id="Hk0uWUaZm39ZX1CjjnqvZ8">特点</th><th data-page-node-id="qC14dfxG2l6SPERxlmvrZz">建议</th></tr>
+<tr data-page-node-id="w8AdHPN501DrtB7F0KF7EB"><td data-page-node-id="MlGUJPcKNxK8FR57Rrwcuc">VS2022 / VS2026 社区版</td><td data-page-node-id="qvmslHZZFEWzyytLHCF9xe">功能最强，调试体验最好，鹏哥用的就是它</td><td data-page-node-id="0nMoSfBYeEAkDqd616f9mY"><span class="tag g" data-page-node-id="UyiXwJRyhlKy8P8G7KMYfZ">首选</span>如果装得上</td></tr>
+<tr data-page-node-id="EuUqH6aDfoNTiSCdDFP0JL"><td data-page-node-id="CI5UDkcamnvASgqYpCGori">Dev-C++ / Code::Blocks</td><td data-page-node-id="5bJ4DHnOmt0GEUZyURgsaz">轻量、安装快、适合考试环境</td><td data-page-node-id="vCpXDeiAG1I1IWLQ057sIV"><span class="tag g" data-page-node-id="zh6Y1FOzqVONazttxmte1K">次选</span>装 VS 失败就用它</td></tr>
+<tr data-page-node-id="GGkDHb2jGUjS3BQxLS1cJf"><td data-page-node-id="QI42ybr0Fs6sY9TpHbLcD0">VS Code + MinGW</td><td data-page-node-id="vuBj1z4PXvvUb4QOc55vsh">好看但配置麻烦</td><td data-page-node-id="axMd74du2tiBHRnyJkGBB6">有时间再折腾</td></tr>
+<tr data-page-node-id="CJ6pQz3nv7ucxaq8b2zHzF"><td data-page-node-id="RDQMvd4H8MBU1Se2BN9x1y">OnlineGDB（网站）</td><td data-page-node-id="4zhKGif9wRgqZixehAAj1x">不用装，打开就写</td><td data-page-node-id="ISdrd5e7E7U9CfUfyJfbuQ"><span class="tag g" data-page-node-id="1tRpHRSR4XVGaYoldHqBwH">应急</span>今天就想写代码先用它</td></tr>
+</table>
+<div class="warn" data-page-node-id="1ZFFw6HubRGN1ERoh9x64W"><p data-page-node-id="qUxnUn5HPQVxCUOPDX6WEX"><strong data-page-node-id="C7B1MDBZAflOC1uiOFlgBH">别在这一集上花太多时间。</strong>工具会用就行，你的目标是 10/17 的卷子。<strong data-page-node-id="2uIPGKe1C1rHtHiNGF0Dyo">若 VS 装不上，立刻换 Dev-C++，不要卡在环境上超过 30 分钟。</strong></p></div>
+</div>
+
+<h3 data-page-node-id="L2xe7BQoEN3CQl7nGFm1OD"><span class="p" data-page-node-id="ENaDh29Dfvd6FCkLTKrNay">P3</span>第一个 C 语言程序</h3>
+<div class="card" data-page-node-id="3gpcsEb5VHhs7E3y97mwDF">
+<pre data-page-node-id="UFMILDiwmgChpdYBpthRRa">#include &lt;stdio.h&gt;          // 1. 头文件：printf 在这里面
+
+int main(void)              // 2. 主函数：程序入口
+{
+    printf("hello world\n"); // 3. 输出一句话
+    return 0;                // 4. 正常结束
+}</pre>
+<p data-page-node-id="941k0rfNwjyW3d5XVLo6ht"><strong data-page-node-id="TW78S0a8SGmvX6bA0Rumr5">四条铁律：</strong></p>
+<ol data-page-node-id="Nccjc75Tsa3HtdmE4Uc30e">
+<li data-page-node-id="DkPVEyR8aHkZh3ztsIGzaN"><code data-page-node-id="ERwSeNrBgmeTYA7YZ0XMli">#include &lt;stdio.h&gt;</code> 是<strong data-page-node-id="JPJQXFZJ2EgEhP9ETZnbrM">预处理指令</strong>，不是语句，末尾<strong data-page-node-id="aLfsu4efrrUEFP5K5GrMHq">不加分号</strong>。</li>
+<li data-page-node-id="q7aTZWlEgE5OLw7Ijdv1qR"><strong data-page-node-id="1yGpTtPWfdFuWEaLtIksQ4">main 是程序唯一的入口</strong>，程序从 main 的第一行开始执行。</li>
+<li data-page-node-id="C3HyZq51NDcBrX5HCK9yIn">每条语句末尾<strong data-page-node-id="NvHwpiBJffxz1HSEMPjlqH">必须有英文分号</strong>（中文分号是新手第一大坑）。</li>
+<li data-page-node-id="ohvPFmyrA8WFa7SGrP9PEF">所有括号必须成对，缩进只是给人看的，不影响编译。</li>
+</ol>
+</div>
+
+<h3 data-page-node-id="wk9g7yuAGjtdByyIcFnnrN"><span class="p" data-page-node-id="GQxJZDPRhPY0oULjeBfB1b">P4</span>main 函数详解</h3>
+<div class="card" data-page-node-id="pw8k2VakrVn0K4ZOeDHwcy">
+<p data-page-node-id="NSSmrYA9HNufbQAHxcwasQ"><strong data-page-node-id="fN3RFLF6IthBSzYH0Yi8i9">记住这四点：</strong></p>
+<ul data-page-node-id="7X3ZQtAkjYTRRGWfHgBwtN">
+<li data-page-node-id="ZcGVTWVHT6H8GTvOpMJEHv"><strong data-page-node-id="kP8hmYBXGBL1a8PuaYvM8S">main 有且只能有一个。</strong>两个 main 程序直接报错。</li>
+<li data-page-node-id="JRHuJcvNhPsmemlpx17BAn"><strong data-page-node-id="2oGyXQEOBixV0d7NkzbYqf">标准写法</strong>：<code data-page-node-id="xwAbfQFZGSEhMCrQS2JbV2">int main(void)</code> 或 <code data-page-node-id="Iyld26E1dI2eITnwEOBmwg">int main(int argc, char* argv[])</code>。</li>
+<li data-page-node-id="xnOybgGGO5avQwceqfjb33"><code data-page-node-id="vHzdWPGpwEzJeufivVAs4P">void main()</code> 是<strong data-page-node-id="oIpgEK6YNDHz43ebbIbvus">不规范的写法</strong>，某些老教材（谭浩强早期版本）有，考试别写。</li>
+<li data-page-node-id="BRATRf8EliPOLZie4v9ZFW"><code data-page-node-id="CM66FRSrxltpVg8oYkt6kG">return 0;</code> 表示程序正常结束；main 里省略 return，C99 之后编译器会自动补 return 0，但<strong data-page-node-id="Yw0geE2OOZJRssY1nPrwh4">你一定要写</strong>。</li>
+</ul>
+<div class="exam" data-page-node-id="weGq4DJuJZDso0x7ZEC5lZ"><p data-page-node-id="EZjrEgCRH3ayUkfj5lDz0c"><strong data-page-node-id="ABBj3vfEuxYH0GegzkBzEs">真题挂接：</strong>选择题常问「以下说法正确的是」——正确项通常是"一个 C 程序有且只有一个 main 函数"。<strong data-page-node-id="L38PFIvZu0kNrkfgoAm65I">看到"可以有多个 main"直接判错。</strong></p></div>
+</div>
+
+<h3 data-page-node-id="EEuK0vY31hHcrUo1A0tL4c"><span class="p" data-page-node-id="RsFdD6MHYdqJtfgHupsCUa">P5</span>printf 函数和库函数 <span class="tag r" data-page-node-id="IPhwmDPGoez2Wki120RBJ7">必考</span></h3>
+<div class="card" data-page-node-id="w0D2xgSDcNC7qSYNwx2rEY">
+<p data-page-node-id="0EfnEaYobeh5YaeLjPT7KH"><strong data-page-node-id="Xm54MwFOqc7vkYrqPqwE38">库函数</strong>：C 标准库已经写好的函数，直接用，但要<strong data-page-node-id="wKtnwEbgXQ0oS0vvlaa0R9">引用对应的头文件</strong>。printf/scanf 在 <code data-page-node-id="dK6meX1vUAJUMqdMsEDxJm">stdio.h</code>；strlen 在 <code data-page-node-id="TlFRc02fkFcRVRnt7Fxndk">string.h</code>；数学函数在 <code data-page-node-id="FI8EfySYJFcFrgu3AiBOi3">math.h</code>。</p>
+<table data-page-node-id="dYkPLL5OVu4TBGotLf68TE">
+<tr data-page-node-id="aplMGR7zfkwzOEAOXjmvr7"><th data-page-node-id="uy2mpP0eOzc2y8YZBDdbMP">格式符</th><th data-page-node-id="5TBTni7NB7Fuu0ayDjDddP">含义</th><th data-page-node-id="cC7yuuuDMQDoJtYSomFmL5">示例输出</th></tr>
+<tr data-page-node-id="wi46ONVCHCjPLt5QR6QiUm"><td data-page-node-id="qFytvaq3jFdYbMHZ0oNhF9"><code data-page-node-id="0RlV9YbtW6TiylamLOEkEq">%d</code></td><td data-page-node-id="TssijCcrq9PULfgI7YICVb">十进制整数 int</td><td data-page-node-id="TG4tQ5fxOopcHD3CiFOdtT">printf("%d", 10) → 10</td></tr>
+<tr data-page-node-id="ECfgDBClTZm5mXJxQ681Vs"><td data-page-node-id="DVb2qWki2KGTyBjXRD7EoE"><code data-page-node-id="g8IqsnzBvqGoJbwVit3OEk">%c</code></td><td data-page-node-id="c4PjwRyzRWm5HeIQmVwrGB">单个字符 char</td><td data-page-node-id="h0ccASORYpDvwWazhRlAhn">printf("%c", 65) → A</td></tr>
+<tr data-page-node-id="d6UdA7SCGe8mkO3KGJqlVl"><td data-page-node-id="KJSG84Q6DvQicNBMa4a987"><code data-page-node-id="j0cjjLjFIyLZj7DCPvYqI4">%f</code> / <code data-page-node-id="QqG2JS7xKPC3DyX6l4l9nE">%lf</code></td><td data-page-node-id="FQbdPFcWPifo51oFCuVXNt">float / double 小数</td><td data-page-node-id="VyhgXFKLSoo5Aluh021V02">printf("%f", 3.14) → 3.140000</td></tr>
+<tr data-page-node-id="6vGPcrfoPNd96DMGfiqeHf"><td data-page-node-id="0sOqvY5Z0HePYmTHDYsZbl"><code data-page-node-id="LHZd7UThkJOgLD3N3oVdbh">%.1f</code></td><td data-page-node-id="cQwSAJCe0G5joyQntDiI9T">保留 1 位小数（<strong data-page-node-id="FvmH9Okzy2EuivuNUJpe6S">四舍五入</strong>）</td><td data-page-node-id="gwCr1XHyddyXArFuanUf7G">printf("%.1f", 3.14159) → 3.1</td></tr>
+<tr data-page-node-id="bOi7OiCkZl4tLoWW9fBB5W"><td data-page-node-id="JcGYElss5IXefPdlbrXkfh"><code data-page-node-id="o3hnzRRq0t2RbcnADjdZjP">%3d</code></td><td data-page-node-id="BFLNNssVBXrj5kCcIDDJEJ">占 3 个字符宽度，<strong data-page-node-id="j1LlAAmIFzYzjyCwCCWe17">右对齐</strong>，不足补空格</td><td data-page-node-id="XRJ1Z9IyJMUigzgDN0VTEI">printf("%3d", 48) → ␣␣48</td></tr>
+<tr data-page-node-id="Q2kLiwU4hMpRmO7V5HSO8s"><td data-page-node-id="cfWAmZgyxeXNYx2uvrUC7e"><code data-page-node-id="Va882EZYgLwSL2h7rFr7aJ">%-3d</code></td><td data-page-node-id="YkfrbcpvCCD3jGVaAhxnBC">左对齐</td><td data-page-node-id="uPymFaZBUrX8ztvj3fKXkH">printf("%-3d", 48) → 48␣</td></tr>
+<tr data-page-node-id="08NW3UjP33pj66qvuMC89O"><td data-page-node-id="HDHpEaUUoG1wzq4kYpHCZG"><code data-page-node-id="IA4WxILwJHQAY6t8woKI6A">%s</code></td><td data-page-node-id="G7CcakTM14ZJVa9iwAUuLK">字符串</td><td data-page-node-id="mrm4qJqY1c1uOTz6eR4Gfj">printf("%s", "abc") → abc</td></tr>
+</table>
+<div class="exam" data-page-node-id="7uGdEC5xAntkBG5lUtnQPN">
+<p data-page-node-id="gXuIy8aH75TAmWxvWR3xTz"><strong data-page-node-id="z2EDGsDL7EEevvGJ0EFB0F">真题挂接（2024 卷）：</strong></p>
+<p data-page-node-id="DyoEvPPHeXy60AdyFP1uEf"><strong data-page-node-id="XAi1FzET8XSOSRa3CfOxOq">第 4 题</strong>：<code data-page-node-id="qsD72dUeZegwEUPoUKszXD">scanf("%c",&x); printf("%3d",x);</code> 输入 0 → 输出 <strong data-page-node-id="K80H84CPd3aYKWhOYhefBO">␣␣48</strong>。这题同时考 P5（%3d 域宽）和 P7（'0' 的 ASCII 是 48）。</p>
+<p data-page-node-id="XISyA4ZlopmptURKqMXcHf"><strong data-page-node-id="DNgQkChdibNGBA8z642awP">第 5 题</strong>：<code data-page-node-id="Qu7YVKaixVl990cdYVSJIy">scanf("%lf",&a); printf("%.0lf",a);</code> 要输出 3 → 输入 2.5~3.4 之间（四舍五入）。考 <code data-page-node-id="yJ2eVoC4ilpKz4E6rYYYfG">%.0lf</code> = 保留 0 位小数即取整。</p>
+</div>
+<div class="tip" data-page-node-id="ciA7WuAZV8M3WMmIPghWC6"><p data-page-node-id="QXAHqrXtGI0vs7E6YBvTbM"><strong data-page-node-id="0e9QeyIMToRLFRo4x0BYRN">易错：</strong>printf 里<strong data-page-node-id="KWBGrpQyA7FDb3SJgAjRCG">格式符个数必须和后面的变量个数、类型一一对应</strong>。<code data-page-node-id="1dlHtXgaYrcReIc3GHUQCb">printf("%d %d", a)</code> 少给一个参数会输出垃圾值，选择题就爱这么考。</p></div>
+</div>
+
+<h3 data-page-node-id="2E3OQjY1AZ9XlaNxYJNvNJ"><span class="p" data-page-node-id="jiTcYkRBH5MG2Niot6OnaU">P6</span>关键字介绍 <span class="tag r" data-page-node-id="Bq9gPd8BlUn2YxZVUmOOwm">必考</span></h3>
+<div class="card" data-page-node-id="JFlTXQw2MTw1CR9X7jh5Rl">
+<p data-page-node-id="Pt6kpeT8tmb2lrwynvOyUG"><strong data-page-node-id="UGsw1Z0HGqYQWoyFj4MOwH">关键字</strong>是 C 语言自己预留的词，<strong data-page-node-id="7E6oA2XKrTnKnMD6XG5JhG">不能拿来当变量名/标识符</strong>。C 语言一共有 32 个关键字。</p>
+<p data-page-node-id="YoyCUx6Otyg5KXXKI3cYS4"><strong data-page-node-id="rRrxfsllpCcwwMYyUDz83R">必须认得的（考试够用）：</strong></p>
+<pre data-page-node-id="kfGkEh0SE5dHmfZotUTR6h">数据类型：char  short  int  long  float  double  signed  unsigned  void
+控制语句：if  else  switch  case  default  while  do  for
+          break  continue  goto  return
+存储与修饰：auto  static  extern  register  const  volatile
+构造类型：struct  union  enum  typedef
+其他：sizeof</pre>
+<p data-page-node-id="CNhnGRBdMjeJLh25eILNaJ"><strong data-page-node-id="MkMOXgUX5BeSTxt6xLDChv">标识符命名规则（必背）：</strong></p>
+<ul data-page-node-id="GbMPBCxPGZtHBsLXL6Z1je">
+<li data-page-node-id="8jGgNCkLnrix2dmfipeq58">只能由<strong data-page-node-id="KLa91nZ1Z2tYRU0tpsADXa">字母、数字、下划线</strong>组成</li>
+<li data-page-node-id="flOCfFN6Aknhlq1CApTCSK"><strong data-page-node-id="05X0UlWdivfWzhCpU0cf4r">不能以数字开头</strong></li>
+<li data-page-node-id="LA7EpV0iHYaLZrfIkd7NwB"><strong data-page-node-id="HBDrCcsklbXdciZLqTIof0">不能是关键字</strong></li>
+<li data-page-node-id="sfApp4DdGHLghfEiDLFPWC">区分大小写（<code data-page-node-id="LRZwYYEZyWoywVOwbk2Dy1">sum</code> 和 <code data-page-node-id="6VpFoH7KsPWznHyj6PHE4t">Sum</code> 是两个东西）</li>
+</ul>
+<div class="exam" data-page-node-id="sQdMCORJQojDPIJQWwFwD7">
+<p data-page-node-id="KbXSD30subCDQmpFF5H4dv"><strong data-page-node-id="QO3phkEUzbTOtSGPX8PEHD">真题挂接（2024 卷第 1 题，原题）</strong>：可用作合法用户标识符的是？<br data-page-node-id="6hGzDKXGACy9kNVhD776hx">
+A. <code data-page-node-id="DhpZgka0aCIiOHRB39i6PN">2a</code> —— 数字开头 ✗　B. <code data-page-node-id="eGJaXywseOMZqrZGIBg68b">void</code> —— 关键字 ✗　C. <code data-page-node-id="unuIbBm46gRDpcxp7WW6Od">-abc</code> —— 含减号 ✗　D. <code data-page-node-id="4uxFC0yT1GMOSJRm9tblUR">_123</code> —— <strong data-page-node-id="c5r5yIdOn1aCJGJtNv84uJ">✓ 正确答案</strong></p>
+</div>
+</div>
+
+<h3 data-page-node-id="ZS9EYOoNMyvOT9kqcC8qIf"><span class="p" data-page-node-id="pxEIL320txAFHNM6vq39X9">P7</span>字符和 ASCII 编码 <span class="tag r" data-page-node-id="wsmuKwQDMGDu3KmehmgruP">必考 · 全场最高频</span></h3>
+<div class="card" data-page-node-id="VsVyaV4LVq4wP9odM3n3yF">
+<p data-page-node-id="UJrQ8rUe0v7eNZRENqDNXE"><strong data-page-node-id="abXZuWD2o6WAjptQXbo7Cy">核心认知：字符本质上是整数。</strong>计算机不存 'A'，只存 65。<code data-page-node-id="SXMjzkC5nxN4l1T41XNhcb">char</code> 类型就是一个 1 字节的小整数。</p>
+<table data-page-node-id="aULxc86QulJBD3Vndi6sdy">
+<tr data-page-node-id="0DJOovDCB1pZlMcBlvihh7"><th data-page-node-id="UELvFKkAJiCHGdAYAvzBuB">字符</th><th data-page-node-id="T8ARYP4pa7tPKuKIs5hSeD">ASCII 值</th><th data-page-node-id="Xo1rEcgZiV83y0VxY52894">说明</th></tr>
+<tr data-page-node-id="uWvcm09w0kpDhNEC9W4Fkc"><td data-page-node-id="9AuXg7gXtgfhchF1EW9R0q"><code data-page-node-id="g08JkKblbp9eXbcxPjpymD">'\0'</code></td><td data-page-node-id="oL1zQSChGloP91DUEuFKQb">0</td><td data-page-node-id="23rw3Na0ZFgRkU7x5YH040">字符串结束标志</td></tr>
+<tr data-page-node-id="frrFNT51nGITBv9OIhC2lp"><td data-page-node-id="oBveiCh7Fwff3uotWAxPX4"><code data-page-node-id="HsOc26PN95XQFDAbjpUv7D">'\n'</code></td><td data-page-node-id="8leQaweJVLBqHHgZlxf9qQ">10</td><td data-page-node-id="t934BHiTuXqTBcFS0QxBQ1">换行</td></tr>
+<tr data-page-node-id="EZEXuMstgHPzhGEROljVBM"><td data-page-node-id="oJH7pCGYLOhsfJs5zAdJD9">空格</td><td data-page-node-id="17DdTqV4jCmD8O29FCdxfR">32</td><td data-page-node-id="94n79M6aw6U1D3ZIrX8m7s">—</td></tr>
+<tr data-page-node-id="qHnSoTqsSop9N3AbAZGarr"><td data-page-node-id="lLx0PqvM8NbqSPF8KiAS5O"><code data-page-node-id="j4EOOIgMUokxJQE2mG4V3q">'0'</code> ~ <code data-page-node-id="cKgTAgw74NFLA5QbiEEb8T">'9'</code></td><td data-page-node-id="Qw0khdqeYpJk6AeYd74mL3">48 ~ 57</td><td data-page-node-id="losy4lN3wJ7oxMAyyJagvk"><strong data-page-node-id="ITjLI5tvjYflMDjdAJtfCs">数字字符 ≠ 数字</strong></td></tr>
+<tr data-page-node-id="xxJXbLLR4blYg6xHYUFwm2"><td data-page-node-id="TuxFTrTdVUzgN69FIWhxlJ"><code data-page-node-id="XpB3u5QE89wFHvTewDKElD">'A'</code> ~ <code data-page-node-id="euQqc5LFpREujptLNCGmbC">'Z'</code></td><td data-page-node-id="i9wWh3f3ToUcvZUeRzp2kV">65 ~ 90</td><td data-page-node-id="gtJZ1wUnVRNlz4gDZOKmC6">—</td></tr>
+<tr data-page-node-id="v2jtBMUTsyuWmRXdGMuEQF"><td data-page-node-id="5ktZDQ5I6d3v0wXtsf2LoL"><code data-page-node-id="B3dQW9I8soy1NvWWbUN4AW">'a'</code> ~ <code data-page-node-id="c7h0J7UwhC2gTFcpZGR3zO">'z'</code></td><td data-page-node-id="R1DJCPF5CbkXRCxwQ59JXP">97 ~ 122</td><td data-page-node-id="UrIRyDzjVYms0BImKouNM0">—</td></tr>
+</table>
+<p data-page-node-id="DN4OQ7hE5iFTmfCog6GgZh"><strong data-page-node-id="1syNgEIqlqbeUte1cJIQEi">三个必会换算：</strong></p>
+<ul data-page-node-id="hixhHQkmKLyiJGt0YBvdaz">
+<li data-page-node-id="Cp6rqumvqr4CHpphYDhVdD">字符转数字：<code data-page-node-id="Z4PhiTrWBQ3z7VYRWWOfkC">'5' - '0' = 5</code>（用 ASCII 相减）</li>
+<li data-page-node-id="i1RQ4cKVGmQ3SLwFQvvWc8">大写转小写：<code data-page-node-id="xI7ewu8NOLjrWHLiGkFGDT">'A' + 32 = 'a'</code>；小写转大写：<code data-page-node-id="fie9liwOJUEGgBiQmPG1kH">'a' - 32 = 'A'</code></li>
+<li data-page-node-id="NEjR2RXb5UMpecQFg7HLNU">判断大小写：<code data-page-node-id="cRP4tm9lA2NobHAfEp3nU9">if(c &gt;= 'a' &amp;&amp; c &lt;= 'z')</code></li>
+</ul>
+<div class="warn" data-page-node-id="FAnldre7zqGd2OAsvActCP">
+<p data-page-node-id="MmzaKiBQ1dn1QOBmNNJ3Y2"><strong data-page-node-id="J5sfhHZbyWQGc6KK2Ca4fI">真题挂接（2024 卷第 4 题）——这一集就是为这题准备的：</strong></p>
+<pre data-page-node-id="hPNE3CpFmsyH7Vg8sP831U">int x;
+scanf("%c", &x);   // 用 %c 读入字符 '0'
+printf("%3d", x);  // 用 %d 打印 → 输出的是 ASCII 值 48，不是 0</pre>
+<p data-page-node-id="0cpXWtkAX68tfGHHZradzb">输入 <code data-page-node-id="rmzhSTxfoCrC21DsdDYTiD">0</code>，输出 <strong data-page-node-id="kWHFLriFU7tUVOHUrxVp7Q">␣␣48</strong>。<strong data-page-node-id="qoFzYjyHmNizh9RJO1FjtE">为什么不是 0？</strong>因为 %c 读进来的是字符 '0'，它存进 int 就是 65 家族的 48。<strong data-page-node-id="fD9JuewClEG6to43mHN9lY">如果代码写的是 scanf("%d")，那输出才是 0。</strong>这一题把 %c 和 %d 的区别考到了骨头里。</p>
+</div>
+<div class="tip" data-page-node-id="frgtrK8rypoi1FVqxA4Jye"><p data-page-node-id="bWH60445OWu1PV9T2Bz704">另外一个高频坑（2024 第 7 题）：<code data-page-node-id="CLBqvBy205vBEcMjG5yavU">scanf("%c%c%c", ...)</code> 输入 <code data-page-node-id="z23gWw4r7k7TR21RQxmAXQ">1 2 3</code>，输出是 <code data-page-node-id="B9wZR6NToY1cPTfKgx8eoT">1 2</code>（<strong data-page-node-id="nSJZCgbfW7VhNXxT1RI9Az">空格也被 %c 读走了</strong>）。%c 不跳过空白字符，%d 会跳过。这条在 P25–29 会细讲，先记住。</p></div>
+</div>
+
+<h3 data-page-node-id="2Fo8rlNsLTGOkI46a5cBCI"><span class="p" data-page-node-id="iKFJXFplzLgbCgPGsSRI93">P8</span>字符串和 \0</h3>
+<div class="card" data-page-node-id="AMBe0wQGOvVeMvuzrMZjQX">
+<p data-page-node-id="mgEnHNoOQw05kSSRyJ4sv8"><strong data-page-node-id="PgVu0B0tgWufWYLzK1hlti">字符串</strong>用双引号，<strong data-page-node-id="1wBMxG97xNE0wWqIKXiTNf">末尾自动补一个 '\0'</strong> 作为结束标志。<strong data-page-node-id="PtCEtyECNS2ex10KPYc7cJ">这个 '\0' 是字符串存在的前提，不占可见内容但占空间。</strong></p>
+<pre data-page-node-id="6Rp4bFi8r9ed0XHvSDcq43">char s1[] = "abc";     // 实际存了 4 个字节：'a' 'b' 'c' '\0'
+char s2[] = {'a','b','c'};  // 只有 3 个字节，没有 '\0' → 不是字符串！</pre>
+<table data-page-node-id="Pzt47mRk8zst161ZdFW2rG">
+<tr data-page-node-id="qlYu5mGxWwYxFqYcCGbibR"><th data-page-node-id="TXF0tzDgKAbfxrnECH4W1L">写法</th><th data-page-node-id="Jh64hcSM3R74CMfy2VNUgE">strlen（长度）</th><th data-page-node-id="lkLuNE031LD6hwdqCpAao3">sizeof（占字节）</th></tr>
+<tr data-page-node-id="GH9T0TUtjSPdpoAlGY14Fc"><td data-page-node-id="3YFfxevQjm1wbiNWteXy1V"><code data-page-node-id="VnO7sqao0RxzlCaGXCSjf0">char s[] = "abc";</code></td><td data-page-node-id="eO4D9NnWYnur4HOp9fNKTj">3</td><td data-page-node-id="zzD36YOl9dCUIl6R2wbImC"><strong data-page-node-id="glxHszuh3pgBYFC5Ki1pDW">4</strong>（含 '\0'）</td></tr>
+<tr data-page-node-id="OtWNDE4q43Ad81y8ogQMHE"><td data-page-node-id="asFCNoIQRKl7Ay2eFdv9KG"><code data-page-node-id="ZdU2bCSy3b6ZjJmH2xGgXP">char s[10] = "abc";</code></td><td data-page-node-id="L3wee0xFmV656wkREgYDci">3</td><td data-page-node-id="loljKKweC5rCqWejEGJrmE"><strong data-page-node-id="wm2BlBel1ui8geZsRTF482">10</strong>（数组开了 10）</td></tr>
+<tr data-page-node-id="HMiPxYYak6CZ5riJEqod43"><td data-page-node-id="BgyYCYJW0csGPf5lwdEBKf"><code data-page-node-id="5HbtVjvb7Finp2xAikLCLx">char s[] = {'a','b','c'};</code></td><td data-page-node-id="uJTq1vdHZIaXEx05cS4PV8">随机值（没 \0 停不下来）</td><td data-page-node-id="5Ecw96ABBbzOvwlMJ3LlYF">3</td></tr>
+</table>
+<p data-page-node-id="p7EWnYxonryECz8c5X4tZW"><strong data-page-node-id="H3qyLmlBmzOQc0rE9Gsa2b">区分：</strong><code data-page-node-id="3e4R8lURQDaYMyRVzG6Wg8">strlen</code> 数的是 '\0' <strong data-page-node-id="7TV713wTHD7D6G8G6lNeEp">之前</strong>的字符个数（要 <code data-page-node-id="9SpLOQFQhbPI3HfKuJCPFW">#include &lt;string.h&gt;</code>）；<code data-page-node-id="KDrsKKdqaDjVfnumLd03X0">sizeof</code> 数的是<strong data-page-node-id="UHVBk01LQJGoc2aPI08Thn">实际占用的字节数</strong>。</p>
+<div class="exam" data-page-node-id="onJdQi6vfjLwCe222XZtlT"><p data-page-node-id="wy9scEjDzCDwXNQlIe6xes"><strong data-page-node-id="8VFADEMYLZ3HBugpx3llCT">真题挂接：</strong>选择题/填空常考 <code data-page-node-id="dri7EPlzxWFh3OT0Grp6E1">char s[]="hello"</code> 的数组长度 = <strong data-page-node-id="LJ3d5XloqX4uU5zzBBSqCV">6</strong>，strlen = <strong data-page-node-id="a7mJSvQ0oiOLMDLgOb099L">5</strong>。<strong data-page-node-id="i4E1XZMWyPVUOp8hOlaI4P">看到字符串就 +1，这是送分题。</strong></p></div>
+</div>
+
+<h3 data-page-node-id="D8AD0pyv2aAv669dVqHwAQ"><span class="p" data-page-node-id="REnwOUHzzsRyzqRerxOEyq">P9</span>转义字符（上）</h3>
+<div class="card" data-page-node-id="6CfQnR2SI66jpH3xCPJPX9">
+<p data-page-node-id="w07eZVlQl3sYVHwac9DxMF"><strong data-page-node-id="3E0DoxwB6oQUXBNTpc5Ch5">转义字符 = 用反斜杠 \ 改变字符原本的含义。</strong></p>
+<table data-page-node-id="bavJ6QEF9Nd62qz0K0Wk6M">
+<tr data-page-node-id="oEgySbBGrLkzJL2H8xq2Fd"><th data-page-node-id="viddGdJNFlxVAxuGm3PUB1">写法</th><th data-page-node-id="YYvZx6IwpMssQDydAdbF7B">含义</th><th data-page-node-id="UsIXrraN7fxRtzLFZYGsKF">要点</th></tr>
+<tr data-page-node-id="MpCjJ9cvVsvJBFtnBDKD5B"><td data-page-node-id="Eve71H1iv4FwwnjCHeseeF"><code data-page-node-id="BtmmCYAn5fxhPouNwA7SG4">\n</code></td><td data-page-node-id="ThMkqaRtnMM7F8qW4HDhnQ">换行</td><td data-page-node-id="sebJbATCby3K1mljVxOrE3">最常用</td></tr>
+<tr data-page-node-id="DLSBXaWsMpAJ7U7OpoCArU"><td data-page-node-id="H2zwZTGiVHaEavC5HkP9jt"><code data-page-node-id="8D9FxUzq7lROFeJnAD6FUW">\t</code></td><td data-page-node-id="4BHv553wHXND3DovGkFaAJ">水平制表符</td><td data-page-node-id="uaHrmtWgi7247SOHUqiF9O">相当于按 Tab</td></tr>
+<tr data-page-node-id="r3BbbofSpzHpK7QmPSTRTa"><td data-page-node-id="NHcaazC45x3JWM2JBLHaVm"><code data-page-node-id="Na7vjCCAmI6INhULi5pwIs">\0</code></td><td data-page-node-id="VnMQ90YVcpxoNmzAe5pV2D">空字符（字符串结束）</td><td data-page-node-id="9RrgrseRdp0KkNdUW4eKtE">ASCII 是 0</td></tr>
+<tr data-page-node-id="TI1IZR2qCW7LazEaYaUlgi"><td data-page-node-id="XuYdvq5KLaBgQjreTDAU47"><code data-page-node-id="UkCmXCGVUcTsMianHFc2PA">\\</code></td><td data-page-node-id="823j1CNBEY8H9wbgSdQHgQ">表示一个反斜杠</td><td data-page-node-id="K9N3kAkzKX0wiUv9cgGTVS">要打 \ 必须写两个</td></tr>
+<tr data-page-node-id="7SSHcR4lamDs0AqHZ6bhzr"><td data-page-node-id="5kVxaJz9OKp4WyLJnm5Y4E"><code data-page-node-id="cLXjESrwLxE0HQFqbBYH46">\'</code> / <code data-page-node-id="vk0jTPFcmmdDQnKu7Q7j1R">\"</code></td><td data-page-node-id="e25s3g8H8FBp7ttkwPXuwb">单引号 / 双引号</td><td data-page-node-id="JZEaXXjQroY76GRgADoWtW">在字符串里打引号用</td></tr>
+<tr data-page-node-id="s3nGP3534IMeTzsVooL5OB"><td data-page-node-id="o5oIbj1GjmdfAJ1WtEjNHC"><code data-page-node-id="hRpdjpvERriCc8cz6EQ6i9">\a</code></td><td data-page-node-id="VgMEmmyqKDxyCUAS6ks2Im">蜂鸣（响铃）</td><td data-page-node-id="yuQjlC0EBIGjExmoyDIwp1">不考，知道即可</td></tr>
+<tr data-page-node-id="CXwAHCWevE5HXIOqzUa116"><td data-page-node-id="9LwFojEQGfiv2Z5hEPkAya"><code data-page-node-id="uwtPN7aAR2wvVsthJ8UcCN">\b</code></td><td data-page-node-id="ewUtctLYqAh6vMPJooLBw9">退格</td><td data-page-node-id="NvxINfpwWzZUFw0AsdsmlX">光标回退一格，不删除</td></tr>
+<tr data-page-node-id="5ZFT9SyLqPhPQAbaTWplUN"><td data-page-node-id="Fz8LPBmgJSJF9NxmDhIcfs"><code data-page-node-id="twB92P7rFtrLTrVYGD1FH8">\r</code></td><td data-page-node-id="XYByjw5jbNiHuSM0ZP1Kj6">回车</td><td data-page-node-id="bGAGgA5flVLOHrqcJ6QDcf">光标回到行首</td></tr>
+</table>
+<p data-page-node-id="H060GF3AIDWXzenwS1vqLi"><strong data-page-node-id="bIW7sSO2bcPAUdQyHZrjZh">关键理解：</strong>每个转义字符<strong data-page-node-id="R8GVuFLGD0d22u18oBfyDL">只算一个字符长度</strong>。所以 <code data-page-node-id="H3vyDjntA1YoT5FfMDjeOc">strlen("a\nb")</code> = 3（a、\n、b），不是 4。</p>
+<div class="exam" data-page-node-id="TDMQjT0O51DHEDaX1wvS1N"><p data-page-node-id="1D6oHvsFch6pDSRE5ohu3x"><strong data-page-node-id="3fF5ajhNKF9yjFpuah7rpX">典型题：</strong><code data-page-node-id="Mh2EBI82xU9qd0aC3WnhgQ">strlen("abc\n")</code> = <strong data-page-node-id="TG762bKEqLvOYmHeWNki7b">4</strong>；<code data-page-node-id="mlGW1hGFTxJBRacS5cHsNa">strlen("a\\b")</code> = <strong data-page-node-id="oQGVD9rAkkK2eqoElCyxHs">3</strong>（\\ 是一个字符）。</p></div>
+</div>
+
+<h3 data-page-node-id="hQlexlAnP84gcCWFAzmHsB"><span class="p" data-page-node-id="9YDFSMWguq8cJJEvUCghjU">P10</span>转义字符（中）· \ddd 与 \xhh</h3>
+<div class="card" data-page-node-id="6wK12ySSOxX11zjJggEhRr">
+<p data-page-node-id="fUcvgHX1bmlesTCuVHlQjN"><strong data-page-node-id="eFb6RgDSFh4hg1eHIUe8EU">八进制转义 <code data-page-node-id="fBj3VfEMwwks14LGhANJsh">\ddd</code></strong>：反斜杠后跟 <strong data-page-node-id="MZXuB828jBiRVDFIUY3J5t">1~3 个八进制数字（0–7）</strong>，表示对应的 ASCII 字符。</p>
+<pre data-page-node-id="DtETLRWYyAJsUvsUwj95NE">'\101'  → 八进制 101 = 十进制 65 = 字符 'A'
+'\60'   → 八进制 60  = 十进制 48 = 字符 '0'
+'\0'    → 八进制 0   = 十进制 0  = 空字符</pre>
+<p data-page-node-id="JHIVwh5o6LLt3nLZuSpDhF"><strong data-page-node-id="nyHfACOEDOIYUA6nz2XUKu">十六进制转义 <code data-page-node-id="i18HLObTcOPT6r0qxd8GiL">\xhh</code></strong>：反斜杠 + x + 十六进制数字。</p>
+<pre data-page-node-id="dcrCfrUB2r6yGRH2RLDThz">'\x41'  → 十六进制 41 = 十进制 65 = 字符 'A'
+'\x30'  → 十六进制 30 = 十进制 48 = 字符 '0'</pre>
+<div class="warn" data-page-node-id="VYxLpZzgaXrCPk1fn2NmV3">
+<p data-page-node-id="gvw77Sjhhwp2FW95pbm7Az"><strong data-page-node-id="HX5MvcxpCLIAAVk2rrlmew">经典陷阱题（必看）：</strong><code data-page-node-id="DJwPuGMtxOlONAmWXC9EJk">strlen("c:\test\328")</code> 等于多少？</p>
+<p data-page-node-id="XyyznsufjXbv4JlAUKeOSK">逐个数：<code data-page-node-id="lXYVXnLY1P9T2pB0WlGAx1">c</code> <code data-page-node-id="2QAGI82cu91koBMn96z48I">:</code> <code data-page-node-id="wdePRdOZUwmEuIMKjoO31J">\t</code>（转义，1 个）<code data-page-node-id="UXSSZdXjsKklJuTFGT6Q2e">e</code> <code data-page-node-id="ZZ1td83dYlSrUivQF0JtFb">s</code> <code data-page-node-id="PhrJfqdD1bsfc7DWtEWHyX">t</code> <code data-page-node-id="SLWliTeMXFToVQYJZEM4AD">\32</code>（八进制转义，<strong data-page-node-id="OOgBOHBG3szVh36keHr3Ov">8 不是八进制数字，所以只吸收 32，8 单独算</strong>）<code data-page-node-id="Ce9lnPmA1ZA10qWtoYKiFL">8</code> → 共 <strong data-page-node-id="OdjO3EtVPUFOMCDHK4ZY8b">8</strong> 个字符？数一遍：c、:、\t、e、s、t、\32、8 = <strong data-page-node-id="lVQYv0z7GB0yOacVbmCXO9">8</strong>。</p>
+<p data-page-node-id="7ydQ6HDofPEixY0GGuV2l3"><strong data-page-node-id="SEOQGszcX2WLuRo2yFcIK4">要点：\ddd 最多吸收 3 个八进制数字，遇到 8、9 立刻停止。</strong>这类题几乎年年在各大 C 语言卷子里出现。</p>
+</div>
+</div>
+
+<h2 data-page-node-id="9ZlipWpmnUvOxep9Mv2ABh">P1–P10 自测（10 题，答案可展开）</h2>
+<p class="mini" data-page-node-id="FOiwPFbA1IWmVcTco0GOVA">先做完再展开，错的题抄进错题本，写清楚"错在哪个知识点"。</p>
+
+<div class="card" data-page-node-id="zpCDoD6YUfINAM6EzbDO6x">
+<ol data-page-node-id="rYi1QoPGmGUbPmqijjjiN4">
+<li data-page-node-id="uEeatoyLPa3kfsiFkD0Oz1"><code data-page-node-id="oExawJ7KFJzHgg65k5k72A">#include &lt;stdio.h&gt;</code> 后面要不要加分号？</li>
+<li data-page-node-id="xMhuV4gbPPhcdqPXL6iKEG">一个 C 程序可以有几个 main 函数？</li>
+<li data-page-node-id="K7bI7NT4H2DslzsXidvsql"><code data-page-node-id="gmqa14yGyEvkel1FysKkB8">void main()</code> 是标准写法吗？</li>
+<li data-page-node-id="DPNPdGcPggNXQgbEjs4NWI">以下哪个是合法标识符：<code data-page-node-id="yr5fXc7g3JaRAvHZGeKm5Y">2a</code> / <code data-page-node-id="WBVtmogPHspG3dDoqfeZu4">void</code> / <code data-page-node-id="nhZVZ7diioiMtt9nD7n2hK">-abc</code> / <code data-page-node-id="I8eYZNUTvU0xgIDFkDv45N">_123</code>？</li>
+<li data-page-node-id="qh09MwsSleWrtfREBqAZlm"><code data-page-node-id="dR9a6kNpyoTyipDSFCmA9t">printf("%3d", 5)</code> 的输出是什么（用 ␣ 表示空格）？</li>
+<li data-page-node-id="eNwrbulGibKjjBhFq89A9k">字符 <code data-page-node-id="AK1E7eehRYGFWwA3TBySqj">'0'</code> 的 ASCII 值是多少？<code data-page-node-id="odG0s0GKBb79Ssvv1Cq2u1">'A'</code> 呢？<code data-page-node-id="0BKBtsJkefKIjTUTCdgFdO">'a'</code> 呢？</li>
+<li data-page-node-id="ti6zaqXS2xZlXbbIRRKsdZ">要把字符 <code data-page-node-id="tEmJRE7LtM5IT2GRJVZe5S">'7'</code> 转成数字 7，表达式怎么写？</li>
+<li data-page-node-id="sjn8y45bqxZVmceeKJfszf"><code data-page-node-id="acdq6byJPlLv6oyv6xCv09">char s[] = "abc";</code> 中 strlen(s) 和 sizeof(s) 分别是多少？</li>
+<li data-page-node-id="7KNCDB0xY2uwmSf9sNB3Wo"><code data-page-node-id="7qiliO2YORnKiEz7u6n8Jv">strlen("a\nb")</code> 等于几？</li>
+<li data-page-node-id="ai4B3jlNZMfIna7q6PTuRI"><code data-page-node-id="YnEStS4C5dnO0ZCEksrdOW">'\101'</code> 表示什么字符？<code data-page-node-id="meFIOPrqGMCmY5JLIpZjyb">'\x41'</code> 呢？</li>
+</ol>
+<details data-page-node-id="CKjQqyJ3q9ROBG1zEmKH6s"><summary data-page-node-id="lGuaXtrSEBbFi6lMREC2xT">答案（做完再看）</summary>
+<div class="ans" data-page-node-id="aTHePeCRGgPNkUeCyw4AJa">
+<p data-page-node-id="m6nyzaNv9U1z3q9eI10oDS">1. <strong data-page-node-id="3BZEjirFH54l28RtajSGmw">不要</strong>，预处理指令不是语句。<br data-page-node-id="UaNLJOW3eR0UUQt9kgH0kh">
+2. <strong data-page-node-id="7sc5ZDS9blpXXB0e1nF4UE">有且只有一个</strong>。<br data-page-node-id="QRPKIaHAHJ9Aaor3S338p0">
+3. <strong data-page-node-id="K4nCpwKxqtMjyGMFmHDrF4">不是</strong>，标准写法是 <code data-page-node-id="OTPACJpcV5PcjfBkqKL74j">int main(void)</code>。<br data-page-node-id="jWj7uQSTDcXVIjonATMpQ8">
+4. <strong data-page-node-id="K6kCUSCP17zrJZ1bS8hHW0">_123</strong>（2a 数字开头；void 是关键字；-abc 含减号）。<br data-page-node-id="WSZjmoWCqToXUt0ArJOh5J">
+5. <strong data-page-node-id="hb8GZvZToNeVAoNy0IihQ3">␣␣5</strong>（右对齐占 3 位）。<br data-page-node-id="BpDwXT5xwgaGOaTRYtIM5H">
+6. <strong data-page-node-id="q6iVQzoQC0rEHSFtiCiRho">48 / 65 / 97</strong>。<br data-page-node-id="8xyMF7AFHzo421GKU6vyUc">
+7. <code data-page-node-id="RFJTBKHYVLrqeI2Xj0plWD">'7' - '0'</code>（等于 7）。<br data-page-node-id="g3PaiNTdauQ8NSXD2DS1TB">
+8. strlen = <strong data-page-node-id="8bnJwFiWzLjVGJTTnwKBVH">3</strong>，sizeof = <strong data-page-node-id="hFiD0UXBG9bjRB8Ke8G8zE">4</strong>（含 '\0'）。<br data-page-node-id="CqiEjJbhuzwd8OFqOb2XE0">
+9. <strong data-page-node-id="eoYwY36ZGqzb0jUOrPqLOo">3</strong>（a、\n、b）。<br data-page-node-id="B5MFgfAFNrYe5Z6Htp9YUJ">
+10. 都是字符 <strong data-page-node-id="GDaKAiIHXzQdbfkYH84mCk">'A'</strong>（101 八进制 = 65；41 十六进制 = 65）。</p>
+</div>
+</details>
+</div>
+
+<h2 data-page-node-id="EqUnFB4buP26cyBO1ESHOt">今天怎么学这 10 集</h2>
+<div class="card" data-page-node-id="dK6ACuh2AQwtkO2gWewuJ4">
+<p data-page-node-id="AJlgp2axRhHlIjqejVJIH1"><strong data-page-node-id="kgYnNVMw3xmThZspDS3Ych">2 倍速看 + 手敲，总时长控制在 90 分钟内。</strong></p>
+<ol data-page-node-id="MvbRQCnJmKC2HZrh4RD3CV">
+<li data-page-node-id="TSpXHbO5hYn2xXZnej8oog"><strong data-page-node-id="mgjSC8Yd76KWO3HbuCyAl3">30′</strong>：P1–P4 快速过（2 倍速），重点只记「程序结构 + main 只有一个 + 分号」。</li>
+<li data-page-node-id="CiNfdceOAHRLlYrBGXnowm"><strong data-page-node-id="ahGTszRV90fUAIi6DjFEaT">40′</strong>：P5–P7 <strong data-page-node-id="nJZHJfYnAhqGUFumbPorVB">慢看，这是真题库</strong>。每看完一集，把下面这 3 段代码亲手敲一遍并运行：<br data-page-node-id="kn6UfjvwMLOeoqp0Be0bpm">
+① <code data-page-node-id="zVZSYvcQNCnulJZClSNclu">printf("%3d", 48);</code>　② <code data-page-node-id="iEULGOR1pq3wgBLCYeC7BU">scanf("%c",&x); printf("%d",x);</code> 输入 0 看结果　③ <code data-page-node-id="mBIG8d9FYmddJXnwhmHyJy">printf("%c %d", 65, 'A');</code></li>
+<li data-page-node-id="U26fnMpFLbvNUuo8aTimIu"><strong data-page-node-id="30bS0DaOU6exkA00qn3AxZ">20′</strong>：P8–P10，重点背 ASCII 三组和 \0，把 <code data-page-node-id="vUiXa6FjKAiyJmc6mCbXhb">strlen</code> 的两个例子跑一遍。</li>
+</ol>
+<p data-page-node-id="6AhCAw9XnXDWoB7NK4K9Q0"><strong data-page-node-id="nQccjk2ByvLEENnK5JuJJO">敲完必须做的动作：</strong>把运行输出截图（或抄下来）发给我，我帮你确认理解有没有偏差。<strong data-page-node-id="8ij8Myka0n4HVwtmSWjnwQ">看视频不敲代码 = 白看。</strong></p>
+</div>
+
+<footer class="doc" data-page-node-id="RtAmcDWCXOB7yD7VOPMOuU">
+笔记依据：B 站「鹏哥 C 语言 2026 最新官方完整版」（BV17a7K64ELH）官方分 P 标题整理，知识点内容为 C 语言标准知识。真题挂接部分来自用户提供的 2024 / 2025 SYUCPCT 招新试题。
+</footer>
+</div>
+</body>
+</html>

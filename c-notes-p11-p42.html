@@ -1,0 +1,498 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>鹏哥 C 语言 2026 版 · P11–P42 笔记</title>
+<style>
+*{box-sizing:border-box}
+body{margin:0;background:#f7f6fa;color:#1b1a26;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif;line-height:1.75;font-size:15px}
+.wrap{max-width:940px;margin:0 auto;padding:0 20px 80px}
+header.hero{background:linear-gradient(135deg,#3c3489,#1e1a4d);color:#fff;padding:38px 0 32px;margin-bottom:20px}
+.w2{max-width:940px;margin:0 auto;padding:0 20px}
+.kicker{font-size:12px;letter-spacing:2px;opacity:.75;margin-bottom:10px}
+header.hero h1{font-size:27px;margin:0 0 10px;font-weight:700;color:#fff}
+.subtitle{font-size:14.5px;opacity:.92;margin:0;max-width:720px}
+.meta{margin-top:14px;font-size:12.5px;opacity:.82}
+h2{font-size:20px;margin:36px 0 12px;padding-bottom:9px;border-bottom:2px solid #e5e3ee}
+h3{font-size:16.5px;margin:24px 0 8px;font-weight:700;color:#2f2a6b}
+h3 .p{display:inline-block;background:#3c3489;color:#fff;font-size:13px;padding:2px 10px;border-radius:5px;margin-right:8px;vertical-align:1px}
+h4{font-size:14.5px;margin:16px 0 6px;font-weight:700;color:#1b1a26}
+p{margin:9px 0;color:#4a4759}
+strong{color:#1b1a26}
+.lead{background:#eeedfe;border-left:4px solid #3c3489;border-radius:0 8px 8px 0;padding:14px 18px;margin:16px 0}
+.lead p{color:#1b1a26;margin:5px 0}
+.warn{background:#fcebeb;border-left:4px solid #a32d2d;border-radius:0 8px 8px 0;padding:13px 18px;margin:14px 0}
+.warn p{color:#7d2626;margin:5px 0}
+.tip{background:#faeeda;border-left:4px solid #854f0b;border-radius:0 8px 8px 0;padding:13px 18px;margin:14px 0}
+.tip p{color:#5c3a09;margin:5px 0}
+.exam{background:#e1f5ee;border-left:4px solid #0f6e56;border-radius:0 8px 8px 0;padding:13px 18px;margin:14px 0}
+.exam p{color:#12503f;margin:5px 0}
+.card{background:#fff;border:1px solid #e5e3ee;border-radius:10px;padding:18px 22px;margin:14px 0}
+table{width:100%;border-collapse:collapse;margin:12px 0;font-size:14px;background:#fff;border:1px solid #e5e3ee;border-radius:8px;overflow:hidden}
+th{background:#efedf8;text-align:left;padding:9px 12px;font-weight:700;color:#1b1a26;border-bottom:1px solid #e5e3ee}
+td{padding:9px 12px;border-bottom:1px solid #f2f0f7;color:#4a4759;vertical-align:top}
+tr:last-child td{border-bottom:none}
+.tag{display:inline-block;padding:1px 8px;border-radius:4px;font-size:12px;background:#eeedfe;color:#3c3489;font-weight:600;margin-right:4px}
+.tag.r{background:#fcebeb;color:#a32d2d}.tag.g{background:#e1f5ee;color:#0f6e56}.tag.y{background:#faeeda;color:#854f0b}
+code{background:#f0eef8;padding:1px 6px;border-radius:4px;font-family:Consolas,monospace;font-size:13px;color:#3f3a72}
+pre{background:#1e1e2e;color:#e8e6f0;padding:15px;border-radius:8px;overflow-x:auto;font-size:13px;line-height:1.6;font-family:Consolas,monospace;margin:10px 0}
+details{background:#fff;border:1px solid #e5e3ee;border-radius:8px;padding:11px 18px;margin:10px 0}
+summary{cursor:pointer;font-weight:700;color:#2f2a6b;font-size:14px}
+details[open]{border-color:#3c3489}
+ul,ol{margin:8px 0;padding-left:22px;color:#4a4759}
+li{margin:5px 0}li::marker{color:#3c3489}
+.mini{font-size:12.5px;color:#7c7990}
+footer.doc{margin-top:38px;padding-top:16px;border-top:1px solid #e5e3ee;font-size:12.5px;color:#7c7990}
+nav.toc{background:#fff;border:1px solid #e5e3ee;border-radius:10px;padding:14px 20px;margin:20px 0}
+nav.toc a{color:#3c3489;text-decoration:none;font-size:14px;display:inline-block;margin:4px 16px 4px 0}
+nav.toc a:hover{text-decoration:underline}
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="w2">
+    <div class="kicker">鹏哥 C 语言 2026 官方完整版 · BV17a7K64ELH</div>
+    <h1>P11 – P42 逐集笔记</h1>
+    <p class="subtitle">32 集，按「真题射程」分三档。写完这份的判断是：<strong>真正值钱的只有 21 集</strong>，其余的要么不考、要么看这张纸就够。</p>
+    <div class="meta">整理于 2026-10-14 · 配套《鹏哥 C 语言 P1–P10 笔记》· 距笔试 3 天</div>
+  </div>
+</header>
+
+<div class="wrap">
+
+<nav class="toc">
+  <a href="#ov">总览与优先级</a><a href="#g1">P11–P14 收尾</a><a href="#g2">P15–P20 类型与变量</a><a href="#g3">P21–P24 操作符</a><a href="#g4">P25–P29 输入输出</a><a href="#g5">P30–P34 分支</a><a href="#g6">P35–P42 循环</a><a href="#tpl">三道必背程序</a><a href="#quiz">自测 12 题</a>
+</nav>
+
+<div class="warn">
+  <p><strong>先说三档优先级（3 天时间只够吃两档）：</strong></p>
+  <p><span class="tag r">第一档 · 必看</span> P21–P24（操作符）· <strong>P25–P29（printf/scanf）</strong> · P35–P37（while/for）—— 这三块直接对应真题选择题和编程题。</p>
+  <p><span class="tag y">第二档 · 看笔记即可</span> P15–P20（类型与变量）· P30–P34（分支）—— 知识点能写在这张纸上，不用花时间看视频。</p>
+  <p><span class="tag g">第三档 · 跳</span> P11（Gitee 上传）· P12/P13/P14 · P41（goto）—— 笔试不考。</p>
+</div>
+
+<h2 id="ov">P11–P42 总览</h2>
+<table>
+<tr><th style="width:88px">集数</th><th>内容</th><th style="width:96px">优先级</th><th>真题挂接</th></tr>
+<tr><td>P11</td><td>把代码上传到 Gitee</td><td><span class="tag g">跳</span></td><td>笔试不考（但对以后有用）</td></tr>
+<tr><td>P12</td><td>转义字符（下）</td><td><span class="tag y">中</span></td><td>strlen 陷阱题、<code>\0</code>、<code>\ddd</code> 八进制</td></tr>
+<tr><td>P13</td><td>语句和语句分类</td><td><span class="tag g">跳</span></td><td>不考</td></tr>
+<tr><td>P14</td><td>注释</td><td><span class="tag g">跳</span></td><td>不考</td></tr>
+<tr><td>P15</td><td>数据类型介绍</td><td><span class="tag y">看笔记</span></td><td>格式符对应的基础</td></tr>
+<tr><td>P16</td><td>sizeof 操作符</td><td><span class="tag r">必懂</span></td><td><strong>数组 P47 的前置</strong></td></tr>
+<tr><td>P17</td><td>signed 和 unsigned</td><td><span class="tag g">跳</span></td><td>极低</td></tr>
+<tr><td>P18</td><td>数据类型取值范围</td><td><span class="tag g">跳</span></td><td>极低</td></tr>
+<tr><td>P19</td><td>变量的创建与分类</td><td><span class="tag y">看笔记</span></td><td>局部变量不初始化 = 编程题隐性丢分</td></tr>
+<tr><td>P20</td><td>全局、局部变量的存储</td><td><span class="tag g">跳</span></td><td>函数才用，已超范围</td></tr>
+<tr><td><strong>P21</strong></td><td><strong>算术操作符 + - * / %</strong></td><td><span class="tag r">必看</span></td><td><strong>整数除法 <code>7/2=3</code>、<code>%</code> 判断整除 —— 编程题命根子</strong></td></tr>
+<tr><td><strong>P22</strong></td><td><strong>赋值与复合赋值</strong></td><td><span class="tag r">必看</span></td><td><strong>2024 真题第 6 题 <code>b *= a += 2</code></strong></td></tr>
+<tr><td><strong>P23</strong></td><td><strong>++ 与 --</strong></td><td><span class="tag r">必看</span></td><td>选择高频，<code>a++</code> vs <code>++a</code></td></tr>
+<tr><td>P24</td><td>强制类型转换</td><td><span class="tag y">中</span></td><td><code>(int)3.9 = 3</code> 截断</td></tr>
+<tr><td><strong>P25–P26</strong></td><td><strong>printf 与 scanf（1）（2）</strong></td><td><span class="tag r">最高</span></td><td><strong>2024 真题第 4、5 题</strong></td></tr>
+<tr><td>P27</td><td>解决 scanf 在 VS 下的报错</td><td><span class="tag g">跳</span></td><td>不考（但写代码时会遇到）</td></tr>
+<tr><td><strong>P28–P29</strong></td><td><strong>printf 与 scanf（3）（4）</strong></td><td><span class="tag r">最高</span></td><td><strong>2024 真题第 7 题 <code>%c</code> 不跳过空格</strong></td></tr>
+<tr><td>P30</td><td>if 语句</td><td><span class="tag y">看笔记</span></td><td>悬空 else、<code>=</code> 误写</td></tr>
+<tr><td>P31</td><td>关系操作符与条件操作符</td><td><span class="tag y">中</span></td><td>三目运算符</td></tr>
+<tr><td><strong>P32–P33</strong></td><td><strong>逻辑操作符 &amp;&amp; || !</strong></td><td><span class="tag r">必看</span></td><td><strong>2024 真题第 8 题：&amp;&amp; 优先级高于 ||</strong></td></tr>
+<tr><td>P34</td><td>switch 语句</td><td><span class="tag y">中</span></td><td>break 穿透</td></tr>
+<tr><td><strong>P35–P36</strong></td><td><strong>while 循环（上）（下）</strong></td><td><span class="tag r">必看</span></td><td><strong>2025 真题编程题框架「读到 0 为止」</strong></td></tr>
+<tr><td><strong>P37</strong></td><td><strong>for 循环</strong></td><td><span class="tag r">必看</span></td><td><strong>2024 真题友好数、能被 3 整除</strong></td></tr>
+<tr><td>P38</td><td>do-while 循环</td><td><span class="tag y">中</span></td><td>至少执行一次</td></tr>
+<tr><td>P39</td><td>break 和 continue</td><td><span class="tag y">中</span></td><td>continue 在 while 里会死循环</td></tr>
+<tr><td>P40</td><td>循环的嵌套</td><td><span class="tag y">中</span></td><td>友好数需要双层思路</td></tr>
+<tr><td>P41</td><td>goto 语句</td><td><span class="tag g">跳</span></td><td>不考，且不该用</td></tr>
+<tr><td>P42</td><td>随机数生成</td><td><span class="tag y">低</span></td><td>猜数字用到，<code>rand()</code></td></tr>
+</table>
+
+<!-- ===================== 组 1 ===================== -->
+<h2 id="g1">第一组 · P11–P14 常见概念收尾</h2>
+
+<h3><span class="p">P11</span>把代码上传到 Gitee <span class="tag g">可跳</span></h3>
+<p>教 Git 基础操作（add / commit / push）。<strong>笔试完全不考</strong>。但这是你以后做项目、写作品集必备的技能，等 10/17 考完再回来补。</p>
+
+<h3><span class="p">P12</span>转义字符（下）<span class="tag y">看这张表就行</span></h3>
+<div class="card">
+<table>
+<tr><th>转义字符</th><th>含义</th><th>说明</th></tr>
+<tr><td><code>\n</code></td><td>换行</td><td>最常用</td></tr>
+<tr><td><code>\t</code></td><td>水平制表符</td><td>对齐用</td></tr>
+<tr><td><code>\0</code></td><td>空字符</td><td><strong>字符串结束标志</strong>，占 1 字节但不计入 strlen</td></tr>
+<tr><td><code>\\</code></td><td>反斜杠本身</td><td>路径里必须写双斜杠</td></tr>
+<tr><td><code>\'</code> <code>\"</code></td><td>单引号 / 双引号</td><td>在字符串里输出引号</td></tr>
+<tr><td><code>\ddd</code></td><td>八进制转义</td><td><strong>1–3 位八进制</strong>，如 <code>\32</code> = 十进制 26</td></tr>
+<tr><td><code>\xhh</code></td><td>十六进制转义</td><td>如 <code>\x41</code> = 'A'</td></tr>
+</table>
+<div class="exam">
+<p><strong>真题挂接：</strong>2024 卷 strlen 类陷阱题，形如 <code>strlen("c:\test\328")</code>。</p>
+<p>拆解：<code>\t</code> 算 1 个、<code>\32</code> 是八进制转义算 1 个、<code>8</code> 单独算 1 个。<strong>坑就在八进制最多吃 3 位，<code>8</code> 不是八进制数字所以被断开。</strong></p>
+</div>
+</div>
+
+<h3><span class="p">P13</span>语句和语句分类 <span class="tag g">可跳</span></h3>
+<p>空语句、表达式语句、函数调用语句、复合语句、控制语句。<strong>知道 C 语言里一个单独的分号 <code>;</code> 也是一条合法语句（空语句）就够了。</strong></p>
+
+<h3><span class="p">P14</span>注释 <span class="tag g">可跳</span></h3>
+<p><code>// 单行</code> 与 <code>/* 块注释 */</code>。<strong>注意：块注释不支持嵌套。</strong></p>
+
+<!-- ===================== 组 2 ===================== -->
+<h2 id="g2">第二组 · P15–P20 数据类型与变量（看这页就够了）</h2>
+
+<h3><span class="p">P15–P18</span>数据类型总表 <span class="tag r">这张表必背</span></h3>
+<div class="card">
+<table>
+<tr><th>类型</th><th>字节</th><th>printf</th><th>scanf</th><th>要记的</th></tr>
+<tr><td><code>char</code></td><td>1</td><td><code>%c</code></td><td><code>%c</code></td><td>−128 ~ 127</td></tr>
+<tr><td><code>short</code></td><td>2</td><td><code>%hd</code></td><td><code>%hd</code></td><td>
+</td></tr>
+<tr><td><code>int</code></td><td>4</td><td><code>%d</code></td><td><code>%d</code></td><td>约 ±21 亿</td></tr>
+<tr><td><code>long</code></td><td>4 / 8</td><td><code>%ld</code></td><td><code>%ld</code></td><td>平台相关</td></tr>
+<tr><td><code>float</code></td><td>4</td><td><code>%f</code></td><td><code>%f</code></td><td>6–7 位有效数字</td></tr>
+<tr><td><code>double</code></td><td>8</td><td><code>%f</code> 或 <code>%lf</code></td><td><strong><code>%lf</code></strong></td><td>15–16 位有效数字</td></tr>
+<tr><td><code>char[]</code></td><td>—</td><td><code>%s</code></td><td><code>%s</code> <strong>不加 &amp;</strong></td><td>字符串</td></tr>
+</table>
+<p><strong>四条硬结论：</strong></p>
+<ol>
+<li><code>sizeof</code> 算的是<strong>字节数</strong>，不是元素个数；<code>sizeof(int)=4</code>、<code>sizeof(char)=1</code>、<code>sizeof(double)=8</code>。</li>
+<li><strong><code>sizeof</code> 是操作符不是函数</strong>，所以 <code>sizeof x</code> 合法，但习惯写 <code>sizeof(x)</code>。</li>
+<li><strong>数组元素个数 = <code>sizeof(arr)/sizeof(arr[0])</code></strong> —— 这一行 P47 整集都在讲，先背下来。</li>
+<li><code>double</code> 用 <code>scanf("%lf")</code>，写成 <code>%f</code> 读出来是乱码。<strong>这是选择题和编程题都爱考的坑。</strong></li>
+</ol>
+</div>
+
+<h3><span class="p">P19–P20</span>变量：这条不注意，编程题会静默丢分</h3>
+<div class="warn">
+<p><strong>局部变量不初始化，值是随机的垃圾值，不是 0。</strong></p>
+<pre>int sum;        // 函数内的局部变量：值不确定
+int sum = 0;    // 正确写法</pre>
+<p>只有<strong>全局变量</strong>和 <code>static</code> 变量才会自动初始化为 0。</p>
+</div>
+<p><strong>为什么特别强调：</strong>循环累加（<code>sum += x</code>）、计数器（<code>count++</code>）忘了写 <code>= 0</code>，代码<strong>能编译、能运行、不报错</strong>，只是输出结果是一串莫名其妙的大数。考场上这类 bug 最难发现，因为你以为自己逻辑对了。</p>
+<p class="mini">全局变量定义在函数外，作用域是整个文件；局部变量定义在函数内，出了大括号就失效。同名时<strong>局部优先</strong>。</p>
+
+<!-- ===================== 组 3 ===================== -->
+<h2 id="g3">第三组 · P21–P24 操作符 <span class="tag r">必看 · 真题主战场</span></h2>
+
+<h3><span class="p">P21</span>算术操作符 <span class="tag r">编程题命根子</span></h3>
+<div class="card">
+<h4>① 整数除法会截断</h4>
+<pre>7 / 2     // 结果 3，不是 3.5！小数部分直接丢弃
+7.0 / 2   // 结果 3.5（有一个操作数是浮点，结果才是浮点）
+7 % 2     // 结果 1，取余</pre>
+<p class="mini">判断整除用 <code>n % 3 == 0</code>，判断奇偶用 <code>n % 2 == 0</code>。<strong>友好数、能被 3 整除的数，这些真题全靠它。</strong></p>
+<h4>② 取余只能用于整数</h4>
+<p><code>7.5 % 2</code> 是<strong>编译错误</strong>，浮点不能取余。</p>
+<h4>③ 负数取余的符号跟被除数一致</h4>
+<pre>-7 % 2   // -1
+7 % -2   // 1</pre>
+</div>
+
+<h3><span class="p">P22</span>赋值与复合赋值 <span class="tag r">真题第 6 题原题</span></h3>
+<div class="exam">
+<p><strong>2024 真题第 6 题：</strong></p>
+<pre>int a = 5, b = 10;
+b *= a += 2;
+printf("%d %d", b, a);   // 输出：70 7</pre>
+<p><strong>复合赋值是右结合的</strong>：先算 <code>a += 2</code> → <code>a = 7</code>；再算 <code>b *= 7</code> → <code>b = 70</code>。</p>
+</div>
+<p>复合赋值家族：<code>+= -= *= /= %= &gt;&gt;= &lt;&lt;= &amp;= |= ^=</code>。<strong>记住它们优先级很低（仅高于逗号），且从右往左结合。</strong></p>
+
+<h3><span class="p">P23</span>++ 与 -- <span class="tag r">选择高频</span></h3>
+<div class="card">
+<pre>int a = 5;
+printf("%d", a++);   // 输出 5 —— 先用后加，之后 a 变 6
+int b = 5;
+printf("%d", ++b);   // 输出 6 —— 先加后用，b 也是 6</pre>
+<div class="warn">
+<p><strong>未定义行为（考场上见到就选"结果不确定"）：</strong></p>
+<pre>printf("%d %d", x++, x);   // 同一表达式里又改又读，C 标准未规定求值顺序
+a = i++ + ++i;             // 同样未定义</pre>
+<p>不同编译器结果不同，<strong>真题如果出这种题，答案就是"取决于编译器"或"未定义"。</strong></p>
+</div>
+</div>
+
+<h3><span class="p">P24</span>强制类型转换</h3>
+<pre>(int)3.14   // 3
+(int)3.9    // 3 —— 截断，不是四舍五入
+(double)5   // 5.0</pre>
+<p>想四舍五入的正确写法：<code>(int)(3.9 + 0.5)</code> = 4。</p>
+<p><strong>隐式转换：</strong>不同类型混合运算时，小的自动转大的（<code>int</code> → <code>double</code>）。<code>5 / 2.0</code> 得 2.5，因为 5 被提升成 5.0。</p>
+
+<!-- ===================== 组 4 ===================== -->
+<h2 id="g4">第四组 · P25–P29 printf 与 scanf <span class="tag r">全场最高频</span></h2>
+
+<h3><span class="p">P25–P26</span>格式符与域宽 <span class="tag r">2024 真题第 4、5 题</span></h3>
+<div class="card">
+<h4>格式符完整表</h4>
+<table>
+<tr><th>格式符</th><th>用途</th><th>格式符</th><th>用途</th></tr>
+<tr><td><code>%d</code></td><td>十进制整数</td><td><code>%s</code></td><td>字符串</td></tr>
+<tr><td><code>%c</code></td><td>单个字符</td><td><code>%p</code></td><td>地址（十六进制）</td></tr>
+<tr><td><code>%f</code></td><td>float / printf 的 double</td><td><code>%x</code> <code>%X</code></td><td>十六进制整数</td></tr>
+<tr><td><code>%lf</code></td><td>double（scanf 必须）</td><td><code>%o</code></td><td>八进制整数</td></tr>
+<tr><td><code>%e</code></td><td>科学计数法</td><td><code>%%</code></td><td>输出一个 % 本身</td></tr>
+</table>
+
+<h4>域宽与精度（真题核心）</h4>
+<pre>printf("%3d", 48);     // " 48"  —— 宽度 3，右对齐，左边补空格
+printf("%-3d", 48);    // "48 "  —— 左对齐
+printf("%03d", 48);    // "048"  —— 补 0
+printf("%5.1f", 3.14159);  // "  3.1"  —— 总宽 5，保留 1 位小数
+printf("%.0lf", 2.5);  // "3"    —— 保留 0 位，四舍五入</pre>
+<div class="exam">
+<p><strong>2024 真题第 4 题：</strong>输入字符 <code>0</code>，执行 <code>scanf("%c", &amp;x); printf("%3d", x);</code></p>
+<p><code>%c</code> 读到的是字符 <code>'0'</code>，其 ASCII 值是 <strong>48</strong>；<code>%3d</code> 宽 3 右对齐 → 输出 <code>"  48"</code>（两个前导空格）。</p>
+</div>
+<div class="exam">
+<p><strong>2024 真题第 5 题：</strong>要输出 3，<code>scanf("%lf",&a); printf("%.0lf",a);</code> 可输入的范围是 <strong>2.5 ~ 3.4</strong>（<code>%.0f</code> 四舍五入）。</p>
+</div>
+</div>
+
+<h3><span class="p">P28–P29</span>scanf 的三个坑 <span class="tag r">2024 真题第 7 题</span></h3>
+<div class="card">
+<h4>坑 1：<code>%c</code> 不跳过空白字符（<code>%d</code> 会跳过）</h4>
+<div class="exam">
+<p><strong>2024 真题第 7 题：</strong>输入 <code>1 2 3</code>，执行 <code>scanf("%c%c%c", &amp;a, &amp;b, &amp;c)</code></p>
+<p>三个 <code>%c</code> 依次读到 <code>'1'</code>、<code>' '</code>、<code>'2'</code> —— <strong>中间的空格被当成字符读进去了。</strong>如果用 <code>%d</code> 则会自动跳过空格。</p>
+<p><strong>解法：</strong>写成 <code>scanf(" %c", &amp;x)</code>，<strong>在 %c 前加一个空格</strong>，即可跳过前面的空白。</p>
+</div>
+<h4>坑 2：必须加 <code>&amp;</code>（取地址）</h4>
+<pre>int a;      scanf("%d", &amp;a);     // 正确
+char s[10]; scanf("%s", s);      // 正确 —— 数组名本身就是地址，不加 &amp;
+int a;      scanf("%d", a);      // 错误，运行时崩溃</pre>
+<h4>坑 3：scanf 的返回值</h4>
+<pre>int n = scanf("%d %d", &amp;a, &amp;b);  // n = 成功读入的变量个数
+while (scanf("%d", &amp;x) == 1) { ... }        // 常用：读到非法输入为止
+while (scanf("%d", &amp;x) != EOF) { ... }      // EOF = -1</pre>
+<p class="mini">这个返回值是「读到 0 为止」那类编程题最优雅的写法，<strong>写进你的模板里</strong>（见文末模板 2）。</p>
+</div>
+
+<h3><span class="p">P27</span>scanf 在 VS 下的报错 <span class="tag g">不看视频</span></h3>
+<p>VS 会提示 <code>scanf</code> 不安全。<strong>在源文件第一行写：</strong></p>
+<pre>#define _CRT_SECURE_NO_WARNINGS 1</pre>
+<p>或者改用 <code>scanf_s</code>。<strong>考试注意：答题纸上要写标准 C 的 <code>scanf</code>，不是 <code>scanf_s</code>。</strong></p>
+
+<!-- ===================== 组 5 ===================== -->
+<h2 id="g5">第五组 · P30–P34 分支结构</h2>
+
+<h3><span class="p">P30</span>if 语句 <span class="tag y">两个坑</span></h3>
+<div class="warn">
+<p><strong>坑 1：把 <code>==</code> 写成 <code>=</code></strong></p>
+<pre>if (a = 1)   // 永远是真！这是赋值，不是比较
+if (a == 1)  // 正确</pre>
+<p>反过来写能防这个错：<code>if (1 == a)</code> —— 万一漏写一个等号，编译器直接报错。</p>
+</div>
+<div class="warn">
+<p><strong>坑 2：悬空 else</strong></p>
+<pre>if (a == 1)
+    if (b == 1) printf("x");
+else printf("y");       // 这个 else 属于内层 if，不是外层的！</pre>
+<p><strong>else 总是和最近的、未配对的 if 结合，与缩进无关。</strong>建议大括号永远写上。</p>
+</div>
+
+<h3><span class="p">P31</span>关系操作符与条件操作符</h3>
+<ul>
+<li>关系：<code>&gt; &gt;= &lt; &lt;= == !=</code>，结果是 1（真）或 0（假）。</li>
+<li><strong>不能写 <code>a &lt; b &lt; c</code></strong> —— 它会先算 <code>a&lt;b</code> 得 0 或 1，再拿这个 0/1 和 c 比。正确写法：<code>a &lt; b &amp;&amp; b &lt; c</code>。</li>
+<li>三目运算符：<code>max = (a &gt; b) ? a : b;</code> —— 一行代替 if-else，写代码很省事。</li>
+</ul>
+
+<h3><span class="p">P32–P33</span>逻辑操作符 <span class="tag r">2024 真题第 8 题</span></h3>
+<div class="exam">
+<p><strong>2024 真题第 8 题：</strong><code>if (a&lt;b &amp;&amp; c&gt;b || a&gt;b &amp;&amp; b&lt;c)</code>，其中 a=5, b=0, c=3，结果是？</p>
+<p><code>&amp;&amp;</code> 优先级<strong>高于</strong> <code>||</code>，所以等价于 <code>(a&lt;b &amp;&amp; c&gt;b) || (a&gt;b &amp;&amp; b&lt;c)</code>。</p>
+<p>代入：<code>(5&lt;0 &amp;&amp; 3&gt;0)</code> = 假；<code>(5&gt;0 &amp;&amp; 0&lt;3)</code> = 真 → 整体为<strong>真</strong>。</p>
+</div>
+<div class="card">
+<h4>短路求值（必考细节）</h4>
+<ul>
+<li><code>&amp;&amp;</code>：左边为假，<strong>右边根本不会执行</strong>。</li>
+<li><code>||</code>：左边为真，<strong>右边根本不会执行</strong>。</li>
+</ul>
+<pre>int a = 0, b = 5;
+if (a != 0 &amp;&amp; b / a &gt; 1)   // 安全！a==0 时右边不执行，不会除零</pre>
+<p><strong>优先级完整顺序（从高到低）：</strong></p>
+<pre>!  →  算术(* / % &gt; + -)  →  关系(&gt; &lt; == ...)  →  &amp;&amp;  →  ||  →  赋值(= += ...)</pre>
+<p class="mini">只记一句就够：<strong>单目 &gt; 算术 &gt; 关系 &gt; &amp;&amp; &gt; || &gt; 赋值</strong>。</p>
+</div>
+
+<h3><span class="p">P34</span>switch 语句</h3>
+<pre>switch (表达式) {        // 表达式必须是整型（int/char）
+    case 1: 语句; break; // break 不能漏
+    case 2: 语句; break;
+    default: 语句;       // 可选，放哪都行
+}</pre>
+<ul>
+<li>漏掉 <code>break</code> 会<strong>穿透</strong>到下一个 case 继续执行。</li>
+<li><code>case</code> 后面必须是<strong>整型常量</strong>，不能是变量，也不能写范围（不能写 <code>case x&gt;10</code>）。</li>
+</ul>
+
+<!-- ===================== 组 6 ===================== -->
+<h2 id="g6">第六组 · P35–P42 循环 <span class="tag r">编程题骨架 · 必看</span></h2>
+
+<h3><span class="p">P35–P36</span>while 循环 <span class="tag r">2025 真题框架</span></h3>
+<pre>while (条件) {
+    循环体;      // 条件为真就执行，直到条件为假
+}</pre>
+<div class="tip">
+<p><strong>读到 0 为止的两类写法（2025 真题就是它）：</strong></p>
+<pre>// 写法 A：死循环 + break（最直观，推荐写这个）
+while (1) {
+    scanf("%d", &amp;x);
+    if (x == 0) break;
+    ...
+}
+// 写法 B：用 scanf 返回值（更优雅）
+while (scanf("%d", &amp;x) == 1 &amp;&amp; x != 0) {
+    ...
+}</pre>
+</div>
+<p><code>getchar()</code> 逐字符读取，遇文件结束返回 <code>EOF</code>（即 −1）。经典框架：<code>while ((ch = getchar()) != EOF)</code>。</p>
+
+<h3><span class="p">P37</span>for 循环 <span class="tag r">2024 真题友好数用它</span></h3>
+<pre>for (初始化; 判断条件; 调整) {
+    循环体;
+}</pre>
+<ul>
+<li>执行顺序：<strong>初始化（只做一次）→ 判断 → 循环体 → 调整 → 判断 → …</strong></li>
+<li>三部分都可省略，但<strong>两个分号不能省</strong>：<code>for(;;)</code> = 死循环。</li>
+<li><strong>不要在循环体里修改循环变量</strong>，容易乱。</li>
+</ul>
+<div class="exam">
+<p><strong>2024 真题：打印 1~100 中能被 3 整除的数</strong></p>
+<pre>for (int i = 1; i &lt;= 100; i++) {
+    if (i % 3 == 0) printf("%d ", i);
+}</pre>
+</div>
+
+<h3><span class="p">P38</span>do-while 循环</h3>
+<pre>do {
+    循环体;
+} while (条件);      // 注意这个分号不能漏</pre>
+<p><strong>与 while 的唯一区别：do-while 至少执行一次</strong>（先做再判断）。适用于"至少要输入一次"的场景。</p>
+
+<h3><span class="p">P39</span>break 与 continue</h3>
+<ul>
+<li><code>break</code>：直接<strong>跳出整个循环</strong>。</li>
+<li><code>continue</code>：<strong>跳过本次循环剩下的部分</strong>，进入下一轮。</li>
+</ul>
+<div class="warn">
+<p><strong>致命区别：</strong>在 <code>while</code> 里用 <code>continue</code> 会跳过"调整"步骤，<strong>可能死循环</strong>；在 <code>for</code> 里用 <code>continue</code> 会正常跳到调整部分，不会死循环。</p>
+<pre>int i = 0;
+while (i &lt; 10) {
+    if (i == 5) continue;   // 死循环！i 永远停在 5
+    i++;
+}</pre>
+</div>
+
+<h3><span class="p">P40</span>循环的嵌套</h3>
+<pre>for (int i = 1; i &lt;= 9; i++) {         // 外层控制行
+    for (int j = 1; j &lt;= i; j++) {     // 内层控制列
+        printf("%d*%d=%d ", j, i, i*j);
+    }
+    printf("\n");
+}</pre>
+<p><strong>真题友好数需要这个思路：</strong>对每一个数 a，先算出它的因子和 b，再验证 b 的因子和是不是等于 a。</p>
+
+<h3><span class="p">P41</span>goto 语句 <span class="tag g">跳</span></h3>
+<p>笔试不考，而且工程实践中明确不推荐使用。略过。</p>
+
+<h3><span class="p">P42</span>随机数生成 <span class="tag y">低</span></h3>
+<pre>#include &lt;stdlib.h&gt;
+#include &lt;time.h&gt;
+srand((unsigned int)time(NULL));   // 播种，main 开头只写一次
+int x = rand() % 100;              // 0 ~ 99
+int y = rand() % 100 + 1;          // 1 ~ 100</pre>
+<p class="mini"><code>rand()</code> 范围是 0 ~ RAND_MAX（通常 32767）。不写 <code>srand</code> 的话每次运行得到同一串数。</p>
+
+<!-- ===================== 模板 ===================== -->
+<h2 id="tpl">三道必背程序 <span class="tag r">考前盲写一遍</span></h2>
+<p>笔试编程题 20 分，从两份真题看，<strong>出题范围就在这三个模板的组合里</strong>。做到不用想就能敲出来。</p>
+
+<h4>模板 1 · 能被 3 整除的数（for + if）</h4>
+<pre>#include &lt;stdio.h&gt;
+int main() {
+    for (int i = 1; i &lt;= 100; i++) {
+        if (i % 3 == 0) printf("%d ", i);
+    }
+    return 0;
+}</pre>
+
+<h4>模板 2 · 读到 0 为止，统计正数个数与负数的和 <span class="tag r">2025 真题</span></h4>
+<pre>#include &lt;stdio.h&gt;
+int main() {
+    int x, pos = 0, negSum = 0;          // 必须初始化为 0！
+    while (1) {
+        scanf("%d", &amp;x);
+        if (x == 0) break;
+        if (x &gt; 0) pos++;
+        else negSum += x;
+    }
+    printf("%d %d\n", pos, negSum);
+    return 0;
+}</pre>
+
+<h4>模板 3 · 友好数（用函数有加分）<span class="tag r">2024 真题</span></h4>
+<pre>#include &lt;stdio.h&gt;
+int factorSum(int n) {
+    int s = 0;
+    for (int i = 1; i &lt; n; i++)
+        if (n % i == 0) s += i;
+    return s;
+}
+int main() {
+    for (int a = 1; a &lt;= 10000; a++) {
+        int b = factorSum(a);
+        if (b &gt; a &amp;&amp; b &lt;= 10000 &amp;&amp; factorSum(b) == a)
+            printf("%d %d\n", a, b);
+    }
+    return 0;
+}</pre>
+<p class="mini">10000 以内的答案：220 284 / 1184 1210 / 2620 2924 / 5020 5564 / 6232 6368。<code>b &gt; a</code> 是为了避免重复输出。</p>
+
+<!-- ===================== 自测 ===================== -->
+<h2 id="quiz">P11–P42 自测（12 题，答案可展开）</h2>
+
+<details><summary>Q1：<code>printf("%d", 7/2);</code> 输出？</summary><div class="card"><p><strong>3。</strong>整数除法截断小数部分。想要 3.5 得写 <code>7.0/2</code> 或 <code>7/2.0</code>。</p></div></details>
+
+<details><summary>Q2：<code>int a=5,b=10; b*=a+=2; printf("%d %d",b,a);</code> 输出？</summary><div class="card"><p><strong>70 7。</strong>复合赋值右结合：先 <code>a+=2</code> → 7，再 <code>b*=7</code> → 70。（2024 真题第 6 题）</p></div></details>
+
+<details><summary>Q3：<code>int a=5; printf("%d",a++);</code> 与 <code>int b=5; printf("%d",++b);</code> 分别输出？</summary><div class="card"><p><strong>5 和 6。</strong><code>a++</code> 先用后加，<code>++b</code> 先加后用。</p></div></details>
+
+<details><summary>Q4：输入字符 0，<code>scanf("%c",&amp;x); printf("%3d",x);</code> 输出？</summary><div class="card"><p><strong>"  48"</strong>（两个前导空格 + 48）。'0' 的 ASCII 是 48，<code>%3d</code> 右对齐宽 3。（2024 真题第 4 题）</p></div></details>
+
+<details><summary>Q5：输入 <code>1 2 3</code>，<code>scanf("%c%c%c",&amp;a,&amp;b,&amp;c);</code> 后 a、b、c 分别是？</summary><div class="card"><p><strong>'1'、' '、'2'。</strong><code>%c</code> 不跳过空白字符，中间的空格被读走了。（2024 真题第 7 题）要跳过空白写成 <code>scanf(" %c", &amp;x)</code>。</p></div></details>
+
+<details><summary>Q6：a=5,b=0,c=3 时，<code>a&lt;b &amp;&amp; c&gt;b || a&gt;b &amp;&amp; b&lt;c</code> 为真还是假？</summary><div class="card"><p><strong>真。</strong><code>&amp;&amp;</code> 优先级高于 <code>||</code>：前一半假，后一半（5&gt;0 且 0&lt;3）真，整体真。（2024 真题第 8 题）</p></div></details>
+
+<details><summary>Q7：<code>printf("%.0lf", 2.5);</code> 与 <code>printf("%.0lf", 2.4);</code> 输出？</summary><div class="card"><p><strong>3 和 2。</strong><code>%.0f</code> 是四舍五入，不是截断。</p></div></details>
+
+<details><summary>Q8：<code>double d; scanf(_____, &amp;d);</code> 空白处填什么？</summary><div class="card"><p><strong><code>%lf</code>。</strong>double 在 scanf 里必须用 <code>%lf</code>（printf 里 <code>%f</code> 和 <code>%lf</code> 都行）。这是最常见的一个失分点。</p></div></details>
+
+<details><summary>Q9：<code>int sum;</code> 然后直接 <code>sum += x;</code> 会怎样？</summary><div class="card"><p><strong>sum 的初始值是垃圾值，结果不可预测。</strong>必须写 <code>int sum = 0;</code>。只有全局变量和 static 才自动为 0。</p></div></details>
+
+<details><summary>Q10：<code>int a=0,b=5; if(a!=0 &amp;&amp; b/a&gt;1)</code> 会不会除零崩溃？</summary><div class="card"><p><strong>不会。</strong><code>&amp;&amp;</code> 短路求值：左边 <code>a!=0</code> 为假，右边根本不执行。</p></div></details>
+
+<details><summary>Q11：下面代码有什么问题？<code>int i=0; while(i&lt;10){ if(i==5) continue; i++; }</code></summary><div class="card"><p><strong>死循环。</strong><code>i</code> 加到 5 时执行 <code>continue</code>，跳过了 <code>i++</code>，i 永远是 5。（在 for 循环里则不会，因为 continue 会跳到调整部分）</p></div></details>
+
+<details><summary>Q12：<code>strlen("c:\test\328")</code> 的值是？（考点：转义字符）</summary><div class="card"><p>逐字符拆：<code>c</code> <code>:</code> <code>\t</code>(1个) <code>e</code> <code>s</code> <code>t</code> <code>\32</code>(八进制转义，1个) <code>8</code> → <strong>8</strong>。</p><p class="mini">关键：<code>\ddd</code> 最多吃 3 位八进制数字，<code>8</code> 不是八进制数字所以断开，单独算一个字符。</p></div></details>
+
+<h2 id="how">今天怎么学这 32 集</h2>
+<div class="lead">
+<p><strong>10/15（2 小时）：</strong>看 P21–P24（30′，2 倍速）→ 看 <strong>P25–P29</strong>（60′，慢看）→ 手敲上面 5 段代码（<code>printf("%3d",48)</code>、<code>scanf("%c")</code> 读 0、<code>b*=a+=2</code>、<code>7/2</code> 与 <code>7.0/2</code>、<code>a++</code> 与 <code>++a</code>）（30′）。</p>
+<p><strong>10/16（2 小时）：</strong>看 P35–P37（40′，必看）→ 看 P30–P34（30′，快进）→ <strong>盲写三个模板程序各一遍并计时</strong>（40′）→ 做上面的 12 道自测（10′）。</p>
+<p><strong>10/17 早上（15′）：</strong>只做两件事——盲写模板 2（读到 0 为止），并把「<code>%c</code> 不跳过空格 / <code>double</code> 用 <code>%lf</code> / <code>7/2=3</code> / <code>&amp;&amp;</code> 高于 <code>||</code>」这四条在纸上默写一遍。</p>
+</div>
+
+<div class="tip">
+<p><strong>一句提醒：</strong>P38–P42（do-while、break/continue、嵌套、随机数）<strong>看这份笔记就够了，不用看视频</strong>。这 5 集里真正会考的只有"continue 在 while 里会死循环"这一条，它已经写在上面了。</p>
+</div>
+
+<footer class="doc">
+集数标题来自 B 站 2026 官方完整版（BV17a7K64ELH）实际分 P 数据，整理于 2026-10-14。标注「真题」的题目来自用户提供的 2024 / 2025 SYUCPCT 招新试题。代码示例均为标准 C，可直接编译运行。
+</footer>
+
+</div>
+</body>
+</html>
